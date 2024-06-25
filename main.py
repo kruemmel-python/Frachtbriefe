@@ -1,7 +1,9 @@
 import sys
 import sqlite3
 import webbrowser
-from PyQt5.QtWidgets import QApplication, QMainWindow, QAction, QMenu, QWidget, QVBoxLayout, QFormLayout, QLineEdit, QPushButton, QTableWidget, QTableWidgetItem, QHeaderView, QHBoxLayout, QSplitter
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QAction, QMenu, QWidget, 
+                             QVBoxLayout, QFormLayout, QLineEdit, QPushButton, 
+                             QTableWidget, QTableWidgetItem, QHeaderView, QHBoxLayout, QSplitter)
 from PyQt5.QtCore import Qt, QPoint
 
 class MainWindow(QMainWindow):
@@ -12,42 +14,23 @@ class MainWindow(QMainWindow):
     def initUI(self):
         self.setWindowTitle('Frachtbriefe')
         self.setGeometry(100, 100, 1200, 800)
-
-        # Menüleiste erstellen
         menubar = self.menuBar()
+        self.createMenu(menubar, 'Internationaler Frachtbrief', self.erfassenInternational, self.abrufenInternational)
+        self.createMenu(menubar, 'Nationaler Frachtbrief', self.erfassenNational, self.abrufenNational)
 
-        fileMenu = menubar.addMenu('Datei')
+    def createMenu(self, menubar, title, erfassen, abrufen):
+        menu = menubar.addMenu(title)
+        erfassenAction = QAction('Daten erfassen', self)
+        erfassenAction.triggered.connect(erfassen)
+        menu.addAction(erfassenAction)
+        abrufenAction = QAction('Daten abrufen', self)
+        abrufenAction.triggered.connect(abrufen)
+        menu.addAction(abrufenAction)
 
-        internationalMenu = menubar.addMenu('Internationaler Frachtbrief')
-        nationalMenu = menubar.addMenu('Nationaler Frachtbrief')
-
-        erfassenActionInternational = QAction('Daten erfassen', self)
-        erfassenActionInternational.triggered.connect(self.erfassenInternational)
-        internationalMenu.addAction(erfassenActionInternational)
-
-        abrufenActionInternational = QAction('Daten abrufen', self)
-        abrufenActionInternational.triggered.connect(self.abrufenInternational)
-        internationalMenu.addAction(abrufenActionInternational)
-
-        erfassenActionNational = QAction('Daten erfassen', self)
-        erfassenActionNational.triggered.connect(self.erfassenNational)
-        nationalMenu.addAction(erfassenActionNational)
-
-        abrufenActionNational = QAction('Daten abrufen', self)
-        abrufenActionNational.triggered.connect(self.abrufenNational)
-        nationalMenu.addAction(abrufenActionNational)
-
-    def erfassenInternational(self):
-        self.setCentralWidget(ErfassenForm('internationalefrachtbriefe'))
-
-    def abrufenInternational(self):
-        self.setCentralWidget(AbrufenForm('internationalefrachtbriefe'))
-
-    def erfassenNational(self):
-        self.setCentralWidget(ErfassenForm('nationalefrachtbriefe'))
-
-    def abrufenNational(self):
-        self.setCentralWidget(AbrufenForm('nationalefrachtbriefe'))
+    def erfassenInternational(self): self.setCentralWidget(ErfassenForm('internationalefrachtbriefe'))
+    def abrufenInternational(self): self.setCentralWidget(AbrufenForm('internationalefrachtbriefe'))
+    def erfassenNational(self): self.setCentralWidget(ErfassenForm('nationalefrachtbriefe'))
+    def abrufenNational(self): self.setCentralWidget(AbrufenForm('nationalefrachtbriefe'))
 
 class ErfassenForm(QWidget):
     def __init__(self, table):
@@ -58,54 +41,28 @@ class ErfassenForm(QWidget):
     def initUI(self):
         layout = QVBoxLayout()
         formLayout = QFormLayout()
-
-        self.fields = {
-            'AusstellungsDatum': QLineEdit(),
-            'Ausstellungsort': QLineEdit(),
-            'AbsenderName': QLineEdit(),
-            'AbsenderAnschrift': QLineEdit(),
-            'AbsenderTelefon': QLineEdit(),
-            'AbsenderEmail': QLineEdit(),
-            'EmpfaengerName': QLineEdit(),
-            'EmpfaengerAnschrift': QLineEdit(),
-            'EmpfaengerTelefon': QLineEdit(),
-            'EmpfaengerEmail': QLineEdit(),
-            'FrachtfuehrerName': QLineEdit(),
-            'FrachtfuehrerAnschrift': QLineEdit(),
-            'FrachtfuehrerTelefon': QLineEdit(),
-            'FrachtfuehrerEmail': QLineEdit(),
-            'Frachtgut': QLineEdit(),
-            'Verpackung': QLineEdit(),
-            'FrachtstueckeAnzahl': QLineEdit(),
-            'Gesamtgewicht': QLineEdit(),
-            'Bemerkungen': QLineEdit(),
-            'Abholort': QLineEdit(),
-            'Abholdatum': QLineEdit(),
-            'Lieferort': QLineEdit(),
-            'Lieferdatum': QLineEdit(),
-            'Transportart': QLineEdit(),
-            'Versicherungsdetails': QLineEdit()
-        }
-
+        self.fields = {field: QLineEdit() for field in [
+            'AusstellungsDatum', 'Ausstellungsort', 'AbsenderName', 'AbsenderAnschrift', 'AbsenderTelefon', 
+            'AbsenderEmail', 'EmpfaengerName', 'EmpfaengerAnschrift', 'EmpfaengerTelefon', 'EmpfaengerEmail', 
+            'FrachtfuehrerName', 'FrachtfuehrerAnschrift', 'FrachtfuehrerTelefon', 'FrachtfuehrerEmail', 'Frachtgut', 
+            'Verpackung', 'FrachtstueckeAnzahl', 'Gesamtgewicht', 'Bemerkungen', 'Abholort', 'Abholdatum', 'Lieferort', 
+            'Lieferdatum', 'Transportart', 'Versicherungsdetails'
+        ]}
         for field, widget in self.fields.items():
             formLayout.addRow(field, widget)
-
         self.submitButton = QPushButton('Speichern')
         self.submitButton.clicked.connect(self.submitData)
         layout.addLayout(formLayout)
         layout.addWidget(self.submitButton)
-
         self.setLayout(layout)
 
     def submitData(self):
         conn = sqlite3.connect('frachtbriefe.db')
         cursor = conn.cursor()
-
         columns = ', '.join(self.fields.keys())
         placeholders = ', '.join('?' * len(self.fields))
         query = f'INSERT INTO {self.table} ({columns}) VALUES ({placeholders})'
         values = [widget.text() for widget in self.fields.values()]
-
         cursor.execute(query, values)
         conn.commit()
         conn.close()
@@ -119,127 +76,77 @@ class AbrufenForm(QWidget):
     def initUI(self):
         layout = QHBoxLayout()
         splitter = QSplitter(Qt.Horizontal)
-
-        # Suchfelder
         searchWidget = QWidget()
         searchLayout = QFormLayout()
-        self.searchFields = {}
-
-        if self.table == 'internationalefrachtbriefe':
-            fields = [
-                'FrachtbriefID', 'AusstellungsDatum', 'Ausstellungsort', 'AbsenderName', 'AbsenderAnschrift', 'AbsenderTelefon', 
-                'AbsenderEmail', 'EmpfaengerName', 'EmpfaengerAnschrift', 'EmpfaengerTelefon', 'EmpfaengerEmail', 
-                'FrachtfuehrerName', 'FrachtfuehrerAnschrift', 'FrachtfuehrerTelefon', 'FrachtfuehrerEmail', 'Frachtgut', 
-                'Verpackung', 'FrachtstueckeAnzahl', 'Gesamtgewicht', 'Bemerkungen', 'Abholort', 'Abholdatum', 'Lieferort', 
-                'Lieferdatum', 'Transportart', 'Versicherungsdetails'
-            ]
-        else:  # 'nationalefrachtbriefe'
-            fields = [
-                'FrachtbriefID', 'AusstellungsDatum', 'Ausstellungsort', 'AbsenderName', 'AbsenderAnschrift', 'AbsenderTelefon', 
-                'AbsenderEmail', 'EmpfaengerName', 'EmpfaengerAnschrift', 'EmpfaengerTelefon', 'EmpfaengerEmail', 
-                'FrachtfuehrerName', 'FrachtfuehrerAnschrift', 'FrachtfuehrerTelefon', 'FrachtfuehrerEmail', 'Frachtgut', 
-                'Verpackung', 'FrachtstueckeAnzahl', 'Gesamtgewicht', 'Bemerkungen', 'Abholort', 'Abholdatum', 'Lieferort', 
-                'Lieferdatum', 'Transportart', 'Versicherungsdetails'
-            ]
-
-        for field in fields:
-            self.searchFields[field] = QLineEdit()
-            searchLayout.addRow(field, self.searchFields[field])
-
+        self.searchFields = {field: QLineEdit() for field in [
+            'FrachtbriefID', 'AusstellungsDatum', 'Ausstellungsort', 'AbsenderName', 'AbsenderAnschrift', 'AbsenderTelefon', 
+            'AbsenderEmail', 'EmpfaengerName', 'EmpfaengerAnschrift', 'EmpfaengerTelefon', 'EmpfaengerEmail', 
+            'FrachtfuehrerName', 'FrachtfuehrerAnschrift', 'FrachtfuehrerTelefon', 'FrachtfuehrerEmail', 'Frachtgut', 
+            'Verpackung', 'FrachtstueckeAnzahl', 'Gesamtgewicht', 'Bemerkungen', 'Abholort', 'Abholdatum', 'Lieferort', 
+            'Lieferdatum', 'Transportart', 'Versicherungsdetails'
+        ]}
+        for field, widget in self.searchFields.items():
+            searchLayout.addRow(field, widget)
         self.searchButton = QPushButton('Suchen')
         self.searchButton.clicked.connect(self.searchData)
         searchLayout.addWidget(self.searchButton)
         searchWidget.setLayout(searchLayout)
         splitter.addWidget(searchWidget)
-
-        # Ergebnisanzeige
         self.tableWidget = QTableWidget()
         self.tableWidget.setColumnCount(len(self.searchFields))
-        self.tableWidget.setHorizontalHeaderLabels(fields)
+        self.tableWidget.setHorizontalHeaderLabels(self.searchFields.keys())
         self.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Interactive)
         self.tableWidget.horizontalHeader().setContextMenuPolicy(Qt.CustomContextMenu)
         self.tableWidget.horizontalHeader().customContextMenuRequested.connect(self.showHeaderContextMenu)
         self.tableWidget.setContextMenuPolicy(Qt.CustomContextMenu)
         self.tableWidget.customContextMenuRequested.connect(self.showRowContextMenu)
         splitter.addWidget(self.tableWidget)
-
         layout.addWidget(splitter)
         self.setLayout(layout)
 
     def searchData(self):
         conn = sqlite3.connect('frachtbriefe.db')
         cursor = conn.cursor()
-
-        conditions = []
-        values = []
-        for field, widget in self.searchFields.items():
-            if widget.text():
-                conditions.append(f"{field} LIKE ?")
-                values.append(f"{widget.text()}%")
-
-        query = f"SELECT * FROM {self.table}"
-        if conditions:
-            query += " WHERE " + " AND ".join(conditions)
-
+        conditions = [f"{field} LIKE ?" for field, widget in self.searchFields.items() if widget.text()]
+        values = [f"{widget.text()}%" for widget in self.searchFields.values() if widget.text()]
+        query = f"SELECT * FROM {self.table}" + (" WHERE " + " AND ".join(conditions) if conditions else "")
         cursor.execute(query, values)
         results = cursor.fetchall()
         self.tableWidget.setRowCount(len(results))
-
         for row_idx, row_data in enumerate(results):
             for col_idx, col_data in enumerate(row_data):
                 self.tableWidget.setItem(row_idx, col_idx, QTableWidgetItem(str(col_data)))
-
         conn.close()
 
     def showHeaderContextMenu(self, pos: QPoint):
         header = self.tableWidget.horizontalHeader()
         logicalIndex = header.logicalIndexAt(pos)
-
         menu = QMenu()
         resizeAction = QAction('Optimale Breite', self)
-        resizeAction.triggered.connect(lambda: self.resizeColumnToContents(logicalIndex))
+        resizeAction.triggered.connect(lambda: self.tableWidget.resizeColumnToContents(logicalIndex))
         menu.addAction(resizeAction)
-
         menu.exec(header.mapToGlobal(pos))
-
-    def resizeColumnToContents(self, logicalIndex):
-        self.tableWidget.resizeColumnToContents(logicalIndex)
 
     def showRowContextMenu(self, pos: QPoint):
         row = self.tableWidget.rowAt(pos.y())
-        if row < 0:
-            return
-
+        if row < 0: return
         menu = QMenu()
         createAction = QAction('Erstelle Frachtbrief', self)
         createAction.triggered.connect(lambda: self.createFrachtbrief(row))
         menu.addAction(createAction)
-
         menu.exec(self.tableWidget.viewport().mapToGlobal(pos))
 
     def createFrachtbrief(self, row):
-        data = {}
-        for col in range(self.tableWidget.columnCount()):
-            header = self.tableWidget.horizontalHeaderItem(col).text()
-            data[header] = self.tableWidget.item(row, col).text()
-
-        if self.table == 'internationalefrachtbriefe':
-            template_path = 'if.html'
-        else:
-            template_path = 'nf.html'
-
+        data = {self.tableWidget.horizontalHeaderItem(col).text(): self.tableWidget.item(row, col).text() for col in range(self.tableWidget.columnCount())}
+        template_path = 'if.html' if self.table == 'internationalefrachtbriefe' else 'nf.html'
         with open(template_path, 'r', encoding='utf-8') as file:
             html_content = file.read()
-
         for key, value in data.items():
             html_content = html_content.replace(f'{{{{ {key} }}}}', value)
-
         filename = f'{data["FrachtbriefID"]}_{data["AusstellungsDatum"]}_{data["EmpfaengerName"]}.html'.replace(" ", "_")
-        output_path = f'{filename}'
-        with open(output_path, 'w', encoding='utf-8') as file:
+        with open(filename, 'w', encoding='utf-8') as file:
             file.write(html_content)
-
-        webbrowser.open(output_path)
+        webbrowser.open(filename)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
