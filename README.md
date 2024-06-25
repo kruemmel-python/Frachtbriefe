@@ -21,8 +21,8 @@ Ein Python-Programm zur Verwaltung und Anzeige von internationalen und nationale
 1. Klonen Sie das Repository:
 
 ```sh
-git clone https://github.com/username/frachtbriefe-gui.git
-cd frachtbriefe-gui
+git clone [https://github.com/kruemmel-python/Frachtbriefe]
+cd frachtbriefe
 ```
 
 Installieren Sie die erforderlichen Bibliotheken:
