@@ -1,7 +1,7 @@
 import sys  # sys hilft uns, mit dem Computer zu sprechen
 import sqlite3  # sqlite3 ist wie ein großes Notizbuch, in das wir Daten schreiben können
 import webbrowser  # webbrowser öffnet den Internetbrowser
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QAction, QWidget, QVBoxLayout, 
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QAction, QMenu, QWidget, QVBoxLayout, 
                              QFormLayout, QLineEdit, QPushButton, QTableWidget, QTableWidgetItem, 
                              QHeaderView, QHBoxLayout, QSplitter)  # PyQt5 sind Bausteine, um Fenster und Buttons zu bauen
 from PyQt5.QtCore import Qt, QPoint  # Qt und QPoint sind Helfer, um Dinge im Fenster anzuordnen
