@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Internationaler Frachtbrief</title>
+    <title>Internationaler Frachtbrief / International Waybill</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -62,149 +62,149 @@
 <body>
 
 <div class="container">
-    <h1>Internationaler Frachtbrief</h1>
+    <h1>Internationaler Frachtbrief / International Waybill</h1>
 
     <div class="section">
         <div class="form-group">
-            <label for="frachtbriefnummer">Frachtbriefnummer</label>
+            <label for="frachtbriefnummer">Frachtbriefnummer / Waybill Number</label>
             <input type="text" id="frachtbriefnummer" name="frachtbriefnummer" value="{{ FrachtbriefID }}">
         </div>
     </div>
 
     <div class="section">
-        <h2>Absenderinformationen</h2>
+        <h2>Absenderinformationen / Sender Information</h2>
         <div class="form-group">
             <label for="absenderName">Name</label>
             <input type="text" id="absenderName" name="absenderName" value="{{ AbsenderName }}">
         </div>
         <div class="form-group">
-            <label for="absenderAnschrift">Anschrift</label>
+            <label for="absenderAnschrift">Anschrift / Address</label>
             <input type="text" id="absenderAnschrift" name="absenderAnschrift" value="{{ AbsenderAnschrift }}">
         </div>
         <div class="form-group">
-            <label for="absenderTelefon">Telefon</label>
+            <label for="absenderTelefon">Telefon / Phone</label>
             <input type="text" id="absenderTelefon" name="absenderTelefon" value="{{ AbsenderTelefon }}">
         </div>
         <div class="form-group">
-            <label for="absenderEmail">E-Mail</label>
+            <label for="absenderEmail">E-Mail / Email</label>
             <input type="email" id="absenderEmail" name="absenderEmail" value="{{ AbsenderEmail }}">
         </div>
     </div>
 
     <div class="section">
-        <h2>Empfängerinformationen</h2>
+        <h2>Empfängerinformationen / Recipient Information</h2>
         <div class="form-group">
             <label for="empfaengerName">Name</label>
             <input type="text" id="empfaengerName" name="empfaengerName" value="{{ EmpfaengerName }}">
         </div>
         <div class="form-group">
-            <label for="empfaengerAnschrift">Anschrift</label>
+            <label for="empfaengerAnschrift">Anschrift / Address</label>
             <input type="text" id="empfaengerAnschrift" name="empfaengerAnschrift" value="{{ EmpfaengerAnschrift }}">
         </div>
         <div class="form-group">
-            <label for="empfaengerTelefon">Telefon</label>
+            <label for="empfaengerTelefon">Telefon / Phone</label>
             <input type="text" id="empfaengerTelefon" name="empfaengerTelefon" value="{{ EmpfaengerTelefon }}">
         </div>
         <div class="form-group">
-            <label for="empfaengerEmail">E-Mail</label>
+            <label for="empfaengerEmail">E-Mail / Email</label>
             <input type="email" id="empfaengerEmail" name="empfaengerEmail" value="{{ EmpfaengerEmail }}">
         </div>
     </div>
 
     <div class="section">
-        <h2>Frachtführerinformationen</h2>
+        <h2>Frachtführerinformationen / Carrier Information</h2>
         <div class="form-group">
             <label for="frachtfuehrerName">Name</label>
             <input type="text" id="frachtfuehrerName" name="frachtfuehrerName" value="{{ FrachtfuehrerName }}">
         </div>
         <div class="form-group">
-            <label for="frachtfuehrerAnschrift">Anschrift</label>
+            <label for="frachtfuehrerAnschrift">Anschrift / Address</label>
             <input type="text" id="frachtfuehrerAnschrift" name="frachtfuehrerAnschrift" value="{{ FrachtfuehrerAnschrift }}">
         </div>
         <div class="form-group">
-            <label for="frachtfuehrerTelefon">Telefon</label>
+            <label for="frachtfuehrerTelefon">Telefon / Phone</label>
             <input type="text" id="frachtfuehrerTelefon" name="frachtfuehrerTelefon" value="{{ FrachtfuehrerTelefon }}">
         </div>
         <div class="form-group">
-            <label for="frachtfuehrerEmail">E-Mail</label>
+            <label for="frachtfuehrerEmail">E-Mail / Email</label>
             <input type="email" id="frachtfuehrerEmail" name="frachtfuehrerEmail" value="{{ FrachtfuehrerEmail }}">
         </div>
     </div>
 
     <div class="section">
-        <h2>Frachtinformationen</h2>
+        <h2>Frachtinformationen / Freight Information</h2>
         <div class="form-group">
-            <label for="ausstellungsDatum">Ausstellungsdatum</label>
+            <label for="ausstellungsDatum">Ausstellungsdatum / Date of Issue</label>
             <input type="date" id="ausstellungsDatum" name="ausstellungsDatum" value="{{ AusstellungsDatum }}">
         </div>
         <div class="form-group">
-            <label for="ausstellungsOrt">Ausstellungsort</label>
+            <label for="ausstellungsOrt">Ausstellungsort / Place of Issue</label>
             <input type="text" id="ausstellungsOrt" name="ausstellungsOrt" value="{{ Ausstellungsort }}">
         </div>
         <div class="form-group">
-            <label for="frachtgut">Frachtgut</label>
+            <label for="frachtgut">Frachtgut / Goods</label>
             <input type="text" id="frachtgut" name="frachtgut" value="{{ Frachtgut }}">
         </div>
         <div class="form-group">
-            <label for="verpackung">Verpackung</label>
+            <label for="verpackung">Verpackung / Packaging</label>
             <input type="text" id="verpackung" name="verpackung" value="{{ Verpackung }}">
         </div>
         <div class="form-group">
-            <label for="frachtstueckeAnzahl">Anzahl der Frachtstücke</label>
+            <label for="frachtstueckeAnzahl">Anzahl der Frachtstücke / Number of Packages</label>
             <input type="number" id="frachtstueckeAnzahl" name="frachtstueckeAnzahl" value="{{ FrachtstueckeAnzahl }}">
         </div>
         <div class="form-group">
-            <label for="gesamtgewicht">Gesamtgewicht (kg)</label>
+            <label for="gesamtgewicht">Gesamtgewicht (kg) / Total Weight (kg)</label>
             <input type="number" step="0.01" id="gesamtgewicht" name="gesamtgewicht" value="{{ Gesamtgewicht }}">
         </div>
         <div class="form-group">
-            <label for="bemerkungen">Bemerkungen</label>
+            <label for="bemerkungen">Bemerkungen / Remarks</label>
             <textarea id="bemerkungen" name="bemerkungen">{{ Bemerkungen }}</textarea>
         </div>
     </div>
 
     <div class="section">
-        <h2>Transportinformationen</h2>
+        <h2>Transportinformationen / Transport Information</h2>
         <div class="form-group">
-            <label for="abholort">Abholort</label>
+            <label for="abholort">Abholort / Pickup Location</label>
             <input type="text" id="abholort" name="abholort" value="{{ Abholort }}">
         </div>
         <div class="form-group">
-            <label for="abholdatum">Abholdatum</label>
+            <label for="abholdatum">Abholdatum / Pickup Date</label>
             <input type="date" id="abholdatum" name="abholdatum" value="{{ Abholdatum }}">
         </div>
         <div class="form-group">
-            <label for="lieferort">Lieferort</label>
+            <label for="lieferort">Lieferort / Delivery Location</label>
             <input type="text" id="lieferort" name="lieferort" value="{{ Lieferort }}">
         </div>
         <div class="form-group">
-            <label for="lieferdatum">Lieferdatum</label>
+            <label for="lieferdatum">Lieferdatum / Delivery Date</label>
             <input type="date" id="lieferdatum" name="lieferdatum" value="{{ Lieferdatum }}">
         </div>
         <div class="form-group">
-            <label for="transportart">Transportart</label>
+            <label for="transportart">Transportart / Mode of Transport</label>
             <input type="text" id="transportart" name="transportart" value="{{ Transportart }}">
         </div>
         <div class="form-group">
-            <label for="versicherungsdetails">Versicherungsdetails</label>
+            <label for="versicherungsdetails">Versicherungsdetails / Insurance Details</label>
             <textarea id="versicherungsdetails" name="versicherungsdetails">{{ Versicherungsdetails }}</textarea>
         </div>
     </div>
 
     <div class="section signatures">
         <div class="signature">
-            <label for="absenderUnterschrift">Absender</label>
-            <input type="text" id="absenderUnterschrift" name="absenderUnterschrift" value="" placeholder="Unterschrift">
+            <label for="absenderUnterschrift">Absender / Sender</label>
+            <input type="text" id="absenderUnterschrift" name="absenderUnterschrift" value="" placeholder="Unterschrift / Signature">
             <input type="date" id="absenderDatum" name="absenderDatum" value="{{ AbsenderDatum }}">
         </div>
         <div class="signature">
-            <label for="frachtfuehrerUnterschrift">Frachtführer</label>
-            <input type="text" id="frachtfuehrerUnterschrift" name="frachtfuehrerUnterschrift" value="" placeholder="Unterschrift">
+            <label for="frachtfuehrerUnterschrift">Frachtführer / Carrier</label>
+            <input type="text" id="frachtfuehrerUnterschrift" name="frachtfuehrerUnterschrift" value="" placeholder="Unterschrift / Signature">
             <input type="date" id="frachtfuehrerDatum" name="frachtfuehrerDatum" value="{{ FrachtfuehrerDatum }}">
         </div>
         <div class="signature">
-            <label for="empfaengerUnterschrift">Empfänger</label>
-            <input type="text" id="empfaengerUnterschrift" name="empfaengerUnterschrift" value="" placeholder="Unterschrift">
+            <label for="empfaengerUnterschrift">Empfänger / Recipient</label>
+            <input type="text" id="empfaengerUnterschrift" name="empfaengerUnterschrift" value="" placeholder="Unterschrift / Signature">
             <input type="date" id="empfaengerDatum" name="empfaengerDatum" value="{{ EmpfaengerDatum }}">
         </div>
     </div>
