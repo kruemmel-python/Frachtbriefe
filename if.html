@@ -3,48 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Internationaler Frachtbrief / International Waybill</title>
+    <title>Internationaler Frachtbrief</title>
     <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-size: 10px; /* Reduzierte Schriftgröße */
         }
         .container {
-            width: 80%;
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #000;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%; /* Maximale Breite */
+            height: 100%; /* Maximale Höhe */
+            padding: 10px; /* Polsterung */
+            box-sizing: border-box;
+            border: 1px solid #000; /* Rahmen um das Formular */
+            background-color: #f0f8ff; /* Hintergrundfarbe */
         }
         h1 {
             text-align: center;
+            font-size: 14px; /* Kleinere Überschrift */
+            margin-bottom: 5px; /* Weniger Abstand nach unten */
+            color: #00008b; /* Textfarbe */
         }
         .section {
-            margin-bottom: 20px;
+            margin-bottom: 5px; /* Weniger Abstand zwischen Abschnitten */
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 5px;
         }
         .section h2 {
+            grid-column: 1 / -1;
             border-bottom: 1px solid #000;
-            padding-bottom: 5px;
+            padding-bottom: 3px; /* Weniger Polsterung unten */
+            margin-bottom: 5px; /* Weniger Abstand nach unten */
+            font-size: 12px; /* Kleinere Zwischenüberschriften */
+            color: #00008b; /* Textfarbe */
         }
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 5px; /* Weniger Abstand zwischen Formulargruppen */
+            position: relative;
         }
         .form-group label {
             display: block;
             font-weight: bold;
+            font-size: 10px; /* Kleinere Beschriftungen */
         }
         .form-group input, .form-group textarea {
             width: 100%;
-            padding: 8px;
-            margin-top: 5px;
+            padding: 3px; /* Weniger Polsterung */
+            margin-top: 2px; /* Weniger Abstand nach oben */
             border: 1px solid #000;
-            border-radius: 4px;
+            border-radius: 2px; /* Weniger abgerundete Ecken */
+            font-size: 10px; /* Kleinere Eingabefelder */
         }
         .form-group textarea {
             resize: vertical;
-            height: 100px;
+            height: 40px; /* Weniger Höhe für Textbereiche */
+        }
+        .form-group::before {
+            content: attr(data-number);
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #00008b; /* Hintergrundfarbe der Nummer */
+            color: white;
+            border-radius: 50%;
+            width: 15px;
+            height: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px; /* Kleinere Schriftgröße für die Nummern */
         }
         .signatures {
             display: flex;
@@ -55,159 +89,215 @@
             text-align: center;
         }
         .signature input {
-            margin-top: 20px;
+            margin-top: 5px; /* Weniger Abstand nach oben */
+        }
+        .notes {
+            font-size: 8px; /* Sehr kleine Schriftgröße */
+            margin-top: 10px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Vier Spalten für die Erläuterungen */
+            grid-gap: 0; /* Kein Abstand zwischen den Erläuterungen */
+            line-height: 1.1; /* Geringere Zeilenhöhe */
+        }
+        .note {
+            display: flex;
+            align-items: center;
+        }
+        .note-number {
+            background-color: #00008b; /* Hintergrundfarbe der Nummer */
+            color: white;
+            border-radius: 50%;
+            width: 15px;
+            height: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px; /* Kleinere Schriftgröße für die Nummern */
+            margin-right: 3px; /* Weniger Abstand zwischen Nummer und Text */
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Internationaler Frachtbrief / International Waybill</h1>
+    <h1>Internationaler Frachtbrief</h1>
 
     <div class="section">
-        <div class="form-group">
-            <label for="frachtbriefnummer">Frachtbriefnummer / Waybill Number</label>
+        <div class="form-group" data-number="1">
+            <label for="frachtbriefnummer">Frachtbriefnummer</label>
             <input type="text" id="frachtbriefnummer" name="frachtbriefnummer" value="{{ FrachtbriefID }}">
         </div>
     </div>
 
     <div class="section">
-        <h2>Absenderinformationen / Sender Information</h2>
-        <div class="form-group">
+        <h2>Absenderinformationen</h2>
+        <div class="form-group" data-number="2">
             <label for="absenderName">Name</label>
             <input type="text" id="absenderName" name="absenderName" value="{{ AbsenderName }}">
         </div>
-        <div class="form-group">
-            <label for="absenderAnschrift">Anschrift / Address</label>
+        <div class="form-group" data-number="3">
+            <label for="absenderAnschrift">Anschrift</label>
             <input type="text" id="absenderAnschrift" name="absenderAnschrift" value="{{ AbsenderAnschrift }}">
         </div>
-        <div class="form-group">
-            <label for="absenderTelefon">Telefon / Phone</label>
+        <div class="form-group" data-number="4">
+            <label for="absenderTelefon">Telefon</label>
             <input type="text" id="absenderTelefon" name="absenderTelefon" value="{{ AbsenderTelefon }}">
         </div>
-        <div class="form-group">
-            <label for="absenderEmail">E-Mail / Email</label>
+        <div class="form-group" data-number="5">
+            <label for="absenderEmail">E-Mail</label>
             <input type="email" id="absenderEmail" name="absenderEmail" value="{{ AbsenderEmail }}">
         </div>
     </div>
 
     <div class="section">
-        <h2>Empfängerinformationen / Recipient Information</h2>
-        <div class="form-group">
+        <h2>Empfängerinformationen</h2>
+        <div class="form-group" data-number="6">
             <label for="empfaengerName">Name</label>
             <input type="text" id="empfaengerName" name="empfaengerName" value="{{ EmpfaengerName }}">
         </div>
-        <div class="form-group">
-            <label for="empfaengerAnschrift">Anschrift / Address</label>
+        <div class="form-group" data-number="7">
+            <label for="empfaengerAnschrift">Anschrift</label>
             <input type="text" id="empfaengerAnschrift" name="empfaengerAnschrift" value="{{ EmpfaengerAnschrift }}">
         </div>
-        <div class="form-group">
-            <label for="empfaengerTelefon">Telefon / Phone</label>
+        <div class="form-group" data-number="8">
+            <label for="empfaengerTelefon">Telefon</label>
             <input type="text" id="empfaengerTelefon" name="empfaengerTelefon" value="{{ EmpfaengerTelefon }}">
         </div>
-        <div class="form-group">
-            <label for="empfaengerEmail">E-Mail / Email</label>
+        <div class="form-group" data-number="9">
+            <label for="empfaengerEmail">E-Mail</label>
             <input type="email" id="empfaengerEmail" name="empfaengerEmail" value="{{ EmpfaengerEmail }}">
         </div>
     </div>
 
     <div class="section">
-        <h2>Frachtführerinformationen / Carrier Information</h2>
-        <div class="form-group">
+        <h2>Frachtführerinformationen</h2>
+        <div class="form-group" data-number="10">
             <label for="frachtfuehrerName">Name</label>
             <input type="text" id="frachtfuehrerName" name="frachtfuehrerName" value="{{ FrachtfuehrerName }}">
         </div>
-        <div class="form-group">
-            <label for="frachtfuehrerAnschrift">Anschrift / Address</label>
+        <div class="form-group" data-number="11">
+            <label for="frachtfuehrerAnschrift">Anschrift</label>
             <input type="text" id="frachtfuehrerAnschrift" name="frachtfuehrerAnschrift" value="{{ FrachtfuehrerAnschrift }}">
         </div>
-        <div class="form-group">
-            <label for="frachtfuehrerTelefon">Telefon / Phone</label>
+        <div class="form-group" data-number="12">
+            <label for="frachtfuehrerTelefon">Telefon</label>
             <input type="text" id="frachtfuehrerTelefon" name="frachtfuehrerTelefon" value="{{ FrachtfuehrerTelefon }}">
         </div>
-        <div class="form-group">
-            <label for="frachtfuehrerEmail">E-Mail / Email</label>
+        <div class="form-group" data-number="13">
+            <label for="frachtfuehrerEmail">E-Mail</label>
             <input type="email" id="frachtfuehrerEmail" name="frachtfuehrerEmail" value="{{ FrachtfuehrerEmail }}">
         </div>
     </div>
 
     <div class="section">
-        <h2>Frachtinformationen / Freight Information</h2>
-        <div class="form-group">
-            <label for="ausstellungsDatum">Ausstellungsdatum / Date of Issue</label>
+        <h2>Frachtinformationen</h2>
+        <div class="form-group" data-number="14">
+            <label for="ausstellungsDatum">Ausstellungsdatum</label>
             <input type="date" id="ausstellungsDatum" name="ausstellungsDatum" value="{{ AusstellungsDatum }}">
         </div>
-        <div class="form-group">
-            <label for="ausstellungsOrt">Ausstellungsort / Place of Issue</label>
+        <div class="form-group" data-number="15">
+            <label for="ausstellungsOrt">Ausstellungsort</label>
             <input type="text" id="ausstellungsOrt" name="ausstellungsOrt" value="{{ Ausstellungsort }}">
         </div>
-        <div class="form-group">
-            <label for="frachtgut">Frachtgut / Goods</label>
+        <div class="form-group" data-number="16">
+            <label for="frachtgut">Frachtgut</label>
             <input type="text" id="frachtgut" name="frachtgut" value="{{ Frachtgut }}">
         </div>
-        <div class="form-group">
-            <label for="verpackung">Verpackung / Packaging</label>
+        <div class="form-group" data-number="17">
+            <label for="verpackung">Verpackung</label>
             <input type="text" id="verpackung" name="verpackung" value="{{ Verpackung }}">
         </div>
-        <div class="form-group">
-            <label for="frachtstueckeAnzahl">Anzahl der Frachtstücke / Number of Packages</label>
+        <div class="form-group" data-number="18">
+            <label for="frachtstueckeAnzahl">Anzahl der Frachtstücke</label>
             <input type="number" id="frachtstueckeAnzahl" name="frachtstueckeAnzahl" value="{{ FrachtstueckeAnzahl }}">
         </div>
-        <div class="form-group">
-            <label for="gesamtgewicht">Gesamtgewicht (kg) / Total Weight (kg)</label>
+        <div class="form-group" data-number="19">
+            <label for="gesamtgewicht">Gesamtgewicht (kg)</label>
             <input type="number" step="0.01" id="gesamtgewicht" name="gesamtgewicht" value="{{ Gesamtgewicht }}">
         </div>
-        <div class="form-group">
-            <label for="bemerkungen">Bemerkungen / Remarks</label>
+        <div class="form-group" data-number="20">
+            <label for="bemerkungen">Bemerkungen</label>
             <textarea id="bemerkungen" name="bemerkungen">{{ Bemerkungen }}</textarea>
         </div>
     </div>
 
     <div class="section">
-        <h2>Transportinformationen / Transport Information</h2>
-        <div class="form-group">
-            <label for="abholort">Abholort / Pickup Location</label>
+        <h2>Transportinformationen</h2>
+        <div class="form-group" data-number="21">
+            <label for="abholort">Abholort</label>
             <input type="text" id="abholort" name="abholort" value="{{ Abholort }}">
         </div>
-        <div class="form-group">
-            <label for="abholdatum">Abholdatum / Pickup Date</label>
+        <div class="form-group" data-number="22">
+            <label for="abholdatum">Abholdatum</label>
             <input type="date" id="abholdatum" name="abholdatum" value="{{ Abholdatum }}">
         </div>
-        <div class="form-group">
-            <label for="lieferort">Lieferort / Delivery Location</label>
+        <div class="form-group" data-number="23">
+            <label for="lieferort">Lieferort</label>
             <input type="text" id="lieferort" name="lieferort" value="{{ Lieferort }}">
         </div>
-        <div class="form-group">
-            <label for="lieferdatum">Lieferdatum / Delivery Date</label>
+        <div class="form-group" data-number="24">
+            <label for="lieferdatum">Lieferdatum</label>
             <input type="date" id="lieferdatum" name="lieferdatum" value="{{ Lieferdatum }}">
         </div>
-        <div class="form-group">
-            <label for="transportart">Transportart / Mode of Transport</label>
+        <div class="form-group" data-number="25">
+            <label for="transportart">Transportart</label>
             <input type="text" id="transportart" name="transportart" value="{{ Transportart }}">
         </div>
-        <div class="form-group">
-            <label for="versicherungsdetails">Versicherungsdetails / Insurance Details</label>
-            <textarea id="versicherungsdetails" name="versicherungsdetails">{{ Versicherungsdetails }}</textarea>
+        <div class="form-group" data-number="26">
+            <label for="versicherungsdetails">Versicherungsdetails</label>
+            <textarea id="versicherungsdetails" name="versicherungsdetails">{{ Versicherungsdetails }}"></textarea>
         </div>
     </div>
 
     <div class="section signatures">
-        <div class="signature">
-            <label for="absenderUnterschrift">Absender / Sender</label>
-            <input type="text" id="absenderUnterschrift" name="absenderUnterschrift" value="" placeholder="Unterschrift / Signature">
-            <input type="date" id="absenderDatum" name="absenderDatum" value="{{ AbsenderDatum }}">
+        <div class="signature" data-number="27">
+            <label for="absenderUnterschrift">Absender</label>
+            <input type="text" id="absenderUnterschrift" name="absenderUnterschrift" value="" placeholder="Unterschrift">
+            <input type="date" id="absenderDatum" name="absenderDatum" value="">
         </div>
-        <div class="signature">
-            <label for="frachtfuehrerUnterschrift">Frachtführer / Carrier</label>
-            <input type="text" id="frachtfuehrerUnterschrift" name="frachtfuehrerUnterschrift" value="" placeholder="Unterschrift / Signature">
-            <input type="date" id="frachtfuehrerDatum" name="frachtfuehrerDatum" value="{{ FrachtfuehrerDatum }}">
+        <div class="signature" data-number="28">
+            <label for="frachtfuehrerUnterschrift">Frachtführer</label>
+            <input type="text" id="frachtfuehrerUnterschrift" name="frachtfuehrerUnterschrift" value="" placeholder="Unterschrift">
+            <input type="date" id="frachtfuehrerDatum" name="frachtfuehrerDatum" value="">
         </div>
-        <div class="signature">
-            <label for="empfaengerUnterschrift">Empfänger / Recipient</label>
-            <input type="text" id="empfaengerUnterschrift" name="empfaengerUnterschrift" value="" placeholder="Unterschrift / Signature">
-            <input type="date" id="empfaengerDatum" name="empfaengerDatum" value="{{ EmpfaengerDatum }}">
+        <div class="signature" data-number="29">
+            <label for="empfaengerUnterschrift">Empfänger</label>
+            <input type="text" id="empfaengerUnterschrift" name="empfaengerUnterschrift" value="" placeholder="Unterschrift">
+            <input type="date" id="empfaengerDatum" name="empfaengerDatum" value="">
         </div>
     </div>
+</div>
+
+<div class="notes">
+    <div class="note"><span class="note-number">1</span>Frachtbriefnummer: Die eindeutige Identifikationsnummer des Frachtbriefs.</div>
+    <div class="note"><span class="note-number">2</span>Absendername: Der vollständige Name des Absenders.</div>
+    <div class="note"><span class="note-number">3</span>Absenderanschrift: Die vollständige Anschrift des Absenders.</div>
+    <div class="note"><span class="note-number">4</span>Absendertelefon: Die Telefonnummer des Absenders.</div>
+    <div class="note"><span class="note-number">5</span>Absender-E-Mail: Die E-Mail-Adresse des Absenders.</div>
+    <div class="note"><span class="note-number">6</span>Empfängername: Der vollständige Name des Empfängers.</div>
+    <div class="note"><span class="note-number">7</span>Empfängeranschrift: Die vollständige Anschrift des Empfängers.</div>
+    <div class="note"><span class="note-number">8</span>Empfängertelefon: Die Telefonnummer des Empfängers.</div>
+    <div class="note"><span class="note-number">9</span>Empfänger-E-Mail: Die E-Mail-Adresse des Empfängers.</div>
+    <div class="note"><span class="note-number">10</span>Frachtführername: Der vollständige Name des Frachtführers.</div>
+    <div class="note"><span class="note-number">11</span>Frachtführeranschrift: Die vollständige Anschrift des Frachtführers.</div>
+    <div class="note"><span class="note-number">12</span>Frachtführertelefon: Die Telefonnummer des Frachtführers.</div>
+    <div class="note"><span class="note-number">13</span>Frachtführer-E-Mail: Die E-Mail-Adresse des Frachtführers.</div>
+    <div class="note"><span class="note-number">14</span>Ausstellungsdatum: Das Datum der Ausstellung des Frachtbriefs.</div>
+    <div class="note"><span class="note-number">15</span>Ausstellungsort: Der Ort der Ausstellung des Frachtbriefs.</div>
+    <div class="note"><span class="note-number">16</span>Frachtgut: Die Beschreibung des Frachtguts.</div>
+    <div class="note"><span class="note-number">17</span>Verpackung: Die Art der Verpackung des Frachtguts.</div>
+    <div class="note"><span class="note-number">18</span>Anzahl der Frachtstücke: Die Anzahl der Frachtstücke.</div>
+    <div class="note"><span class="note-number">19</span>Gesamtgewicht: Das Gesamtgewicht der Fracht in Kilogramm.</div>
+    <div class="note"><span class="note-number">20</span>Bemerkungen: Zusätzliche Bemerkungen oder Anweisungen.</div>
+    <div class="note"><span class="note-number">21</span>Abholort: Der Ort, an dem die Fracht abgeholt wird.</div>
+    <div class="note"><span class="note-number">22</span>Abholdatum: Das Datum der Abholung der Fracht.</div>
+    <div class="note"><span class="note-number">23</span>Lieferort: Der Ort, an den die Fracht geliefert wird.</div>
+    <div class="note"><span class="note-number">24</span>Lieferdatum: Das Datum der Lieferung der Fracht.</div>
+    <div class="note"><span class="note-number">25</span>Transportart: Die Art des Transports.</div>
+    <div class="note"><span class="note-number">26</span>Versicherungsdetails: Informationen zur Versicherung der Fracht.</div>
+    <div class="note"><span class="note-number">27</span>Absenderunterschrift: Die Unterschrift des Absenders und das Datum.</div>
+    <div class="note"><span class="note-number">28</span>Frachtführerunterschrift: Die Unterschrift des Frachtführers und das Datum.</div>
+    <div class="note"><span class="note-number">29</span>Empfängerunterschrift: Die Unterschrift des Empfängers und das Datum.</div>
 </div>
 
 </body>
