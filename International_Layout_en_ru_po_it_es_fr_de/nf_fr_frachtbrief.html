@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lettre de voiture nationale / National Waybill</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-size: 10px;
+        }
+        .container {
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        h1 {
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .section {
+            margin-bottom: 5px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 5px;
+        }
+        .section h2 {
+            grid-column: 1 / -1;
+            border-bottom: 1px solid #000;
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+            font-size: 12px;
+            color: blue;
+        }
+        .form-group {
+            margin-bottom: 5px;
+            position: relative;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            font-size: 10px;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 3px;
+            margin-top: 2px;
+            border: 1px solid #000;
+            border-radius: 2px;
+            font-size: 10px;
+        }
+        .form-group textarea {
+            resize: vertical;
+            height: 40px;
+        }
+        .form-group::after {
+            content: attr(data-number);
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: blue;
+            color: white;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 10px;
+        }
+        .signatures {
+            display: flex;
+            justify-content: space-between;
+        }
+        .signature {
+            width: 30%;
+            text-align: center;
+            position: relative;
+        }
+        .signature input {
+            margin-top: 5px.
+        }
+        .notes {
+            font-size: 9px.
+            margin-top: 6px.
+        }
+        .notes .note {
+            display: inline-block.
+            vertical-align: top.
+            width: 30%.
+            margin-right: 5px.
+        }
+        .note-number {
+            color: blue.
+            font-weight: bold.
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Lettre de voiture nationale / National Waybill</h1>
+
+    <div class="section">
+        <div class="form-group" data-number="1">
+            <label for="frachtbriefnummer">Numéro de lettre de voiture / Waybill Number</label>
+            <input type="text" id="frachtbriefnummer" name="frachtbriefnummer" value="{{ FrachtbriefID }}">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Informations sur l'expéditeur / Sender Information</h2>
+        <div class="form-group" data-number="2">
+            <label for="absenderName">Nom</label>
+            <input type="text" id="absenderName" name="absenderName" value="{{ AbsenderName }}">
+        </div>
+        <div class="form-group" data-number="3">
+            <label for="absenderAnschrift">Adresse / Address</label>
+            <input type="text" id="absenderAnschrift" name="absenderAnschrift" value="{{ AbsenderAnschrift }}">
+        </div>
+        <div class="form-group" data-number="4">
+            <label for="absenderTelefon">Téléphone / Phone</label>
+            <input type="text" id="absenderTelefon" name="absenderTelefon" value="{{ AbsenderTelefon }}">
+        </div>
+        <div class="form-group" data-number="5">
+            <label for="absenderEmail">E-Mail / Email</label>
+            <input type="email" id="absenderEmail" name="absenderEmail" value="{{ AbsenderEmail }}">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Informations sur le destinataire / Recipient Information</h2>
+        <div class="form-group" data-number="6">
+            <label for="empfaengerName">Nom</label>
+            <input type="text" id="empfaengerName" name="empfaengerName" value="{{ EmpfaengerName }}">
+        </div>
+        <div class="form-group" data-number="7">
+            <label for="empfaengerAnschrift">Adresse / Address</label>
+            <input type="text" id="empfaengerAnschrift" name="empfaengerAnschrift" value="{{ EmpfaengerAnschrift }}">
+        </div>
+        <div class="form-group" data-number="8">
+            <label for="empfaengerTelefon">Téléphone / Phone</label>
+            <input type="text" id="empfaengerTelefon" name="empfaengerTelefon" value="{{ EmpfaengerTelefon }}">
+        </div>
+        <div class="form-group" data-number="9">
+            <label for="empfaengerEmail">E-Mail / Email</label>
+            <input type="email" id="empfaengerEmail" name="empfaengerEmail" value="{{ EmpfaengerEmail }}">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Informations sur le transporteur / Carrier Information</h2>
+        <div class="form-group" data-number="10">
+            <label for="frachtfuehrerName">Nom</label>
+            <input type="text" id="frachtfuehrerName" name="frachtfuehrerName" value="{{ FrachtfuehrerName }}">
+        </div>
+        <div class="form-group" data-number="11">
+            <label for="frachtfuehrerAnschrift">Adresse / Address</label>
+            <input type="text" id="frachtfuehrerAnschrift" name="frachtfuehrerAnschrift" value="{{ FrachtfuehrerAnschrift }}">
+        </div>
+        <div class="form-group" data-number="12">
+            <label for="frachtfuehrerTelefon">Téléphone / Phone</label>
+            <input type="text" id="frachtfuehrerTelefon" name="frachtfuehrerTelefon" value="{{ FrachtfuehrerTelefon }}">
+        </div>
+        <div class="form-group" data-number="13">
+            <label for="frachtfuehrerEmail">E-Mail / Email</label>
+            <input type="email" id="frachtfuehrerEmail" name="frachtfuehrerEmail" value="{{ FrachtfuehrerEmail }}">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Informations sur le fret / Freight Information</h2>
+        <div class="form-group" data-number="14">
+            <label for="ausstellungsDatum">Date d'émission / Date of Issue</label>
+            <input type="date" id="ausstellungsDatum" name="ausstellungsDatum" value="{{ AusstellungsDatum }}">
+        </div>
+        <div class="form-group" data-number="15">
+            <label for="ausstellungsOrt">Lieu d'émission / Place of Issue</label>
+            <input type="text" id="ausstellungsOrt" name="ausstellungsOrt" value="{{ Ausstellungsort }}">
+        </div>
+        <div class="form-group" data-number="16">
+            <label for="frachtgut">Marchandises / Goods</label>
+            <input type="text" id="frachtgut" name="frachtgut" value="{{ Frachtgut }}">
+        </div>
+        <div class="form-group" data-number="17">
+            <label for="verpackung">Emballage / Packaging</label>
+            <input type="text" id="verpackung" name="verpackung" value="{{ Verpackung }}">
+        </div>
+        <div class="form-group" data-number="18">
+            <label for="frachtstueckeAnzahl">Nombre de colis / Number of Packages</label>
+            <input type="number" id="frachtstueckeAnzahl" name="frachtstueckeAnzahl" value="{{ FrachtstueckeAnzahl }}">
+        </div>
+        <div class="form-group" data-number="19">
+            <label for="gesamtgewicht">Poids total (kg) / Total Weight (kg)</label>
+            <input type="number" step="0.01" id="gesamtgewicht" name="gesamtgewicht" value="{{ Gesamtgewicht }}">
+        </div>
+        <div class="form-group" data-number="20">
+            <label for="bemerkungen">Remarques / Remarks</label>
+            <textarea id="bemerkungen" name="bemerkungen">{{ Bemerkungen }}</textarea>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Informations sur le transport / Transport Information</h2>
+        <div class="form-group" data-number="21">
+            <label for="abholort">Lieu de ramassage / Pickup Location</label>
+            <input type="text" id="abholort" name="abholort" value="{{ Abholort }}">
+        </div>
+        <div class="form-group" data-number="22">
+            <label for="abholdatum">Date de ramassage / Pickup Date</label>
+            <input type="date" id="abholdatum" name="abholdatum" value="{{ Abholdatum }}">
+        </div>
+        <div class="form-group" data-number="23">
+            <label for="lieferort">Lieu de livraison / Delivery Location</label>
+            <input type="text" id="lieferort" name="lieferort" value="{{ Lieferort }}">
+        </div>
+        <div class="form-group" data-number="24">
+            <label for="lieferdatum">Date de livraison / Delivery Date</label>
+            <input type="date" id="lieferdatum" name="lieferdatum" value="{{ Lieferdatum }}">
+        </div>
+        <div class="form-group" data-number="25">
+            <label for="transportart">Mode de transport / Mode of Transport</label>
+            <input type="text" id="transportart" name="transportart" value="{{ Transportart }}">
+        </div>
+        <div class="form-group" data-number="26">
+            <label for="versicherungsdetails">Détails de l'assurance / Insurance Details</label>
+            <textarea id="versicherungsdetails" name="versicherungsdetails">{{ Versicherungsdetails }}</textarea>
+        </div>
+    </div>
+
+    <div class="section signatures">
+        <div class="signature" data-number="27">
+            <label for="absenderUnterschrift">Expéditeur / Sender</label>
+            <input type="text" id="absenderUnterschrift" name="absenderUnterschrift" value="" placeholder="Signature / Signature">
+            <input type="date" id="absenderDatum" name="absenderDatum" value="{{ AbsenderDatum }}">
+        </div>
+        <div class="signature" data-number="28">
+            <label for="frachtfuehrerUnterschrift">Transporteur / Carrier</label>
+            <input type="text" id="frachtfuehrerUnterschrift" name="frachtfuehrerUnterschrift" value="" placeholder="Signature / Signature">
+            <input type="date" id="frachtfuehrerDatum" name="frachtfuehrerDatum" value="{{ FrachtfuehrerDatum }}">
+        </div>
+        <div class="signature" data-number="29">
+            <label for="empfaengerUnterschrift">Destinataire / Recipient</label>
+            <input type="text" id="empfaengerUnterschrift" name="empfaengerUnterschrift" value="" placeholder="Signature / Signature">
+            <input type="date" id="empfaengerDatum" name="empfaengerDatum" value="{{ EmpfaengerDatum }}">
+        </div>
+    </div>
+
+    <div class="notes">
+        <div class="note">
+            <span class="note-number">1.</span> Numéro de lettre de voiture: Numéro d'identification unique de la lettre de voiture.
+            <span class="note-number">2.</span> Nom de l'expéditeur: Nom complet de l'expéditeur.
+            <span class="note-number">3.</span> Adresse de l'expéditeur: Adresse complète de l'expéditeur.
+            <span class="note-number">4.</span> Téléphone de l'expéditeur: Numéro de téléphone de l'expéditeur.
+            <span class="note-number">5.</span> E-Mail de l'expéditeur: Adresse e-mail de l'expéditeur.
+            <span class="note-number">6.</span> Nom du destinataire: Nom complet du destinataire.
+            <span class="note-number">7.</span> Adresse du destinataire: Adresse complète du destinataire.
+            <span class="note-number">8.</span> Téléphone du destinataire: Numéro de téléphone du destinataire.
+            <span class="note-number">9.</span> E-Mail du destinataire: Adresse e-mail du destinataire.
+        </div>
+        <div class="note">
+            <span class="note-number">10.</span> Nom du transporteur: Nom complet du transporteur.
+            <span class="note-number">11.</span> Adresse du transporteur: Adresse complète du transporteur.
+            <span class="note-number">12.</span> Téléphone du transporteur: Numéro de téléphone du transporteur.
+            <span class="note-number">13.</span> E-Mail du transporteur: Adresse e-mail du transporteur.
+            <span class="note-number">14.</span> Date d'émission: Date d'émission de la lettre de voiture.
+            <span class="note-number">15.</span> Lieu d'émission: Lieu d'émission de la lettre de voiture.
+            <span class="note-number">16.</span> Marchandises: Description des marchandises.
+            <span class="note-number">17.</span> Emballage: Type d'emballage des marchandises.
+            <span class="note-number">18.</span> Nombre de colis: Nombre de colis.
+        </div>
+        <div class="note">
+            <span class="note-number">19.</span> Poids total: Poids total des marchandises en kilogrammes.
+            <span class="note-number">20.</span> Remarques: Remarques ou instructions supplémentaires.
+            <span class="note-number">21.</span> Lieu de ramassage: Lieu où les marchandises seront ramassées.
+            <span class="note-number">22.</span> Date de ramassage: Date de ramassage des marchandises.
+            <span class="note-number">23.</span> Lieu de livraison: Lieu où les marchandises seront livrées.
+            <span class="note-number">24.</span> Date de livraison: Date de livraison des marchandises.
+            <span class="note-number">25.</span> Mode de transport: Mode de transport.
+            <span class="note-number">26.</span> Détails de l'assurance: Informations sur l'assurance des marchandises.
+            <span class="note-number">27.</span> Signature de l'expéditeur: Signature et date de l'expéditeur.
+            <span class="note-number">28.</span> Signature du transporteur: Signature et date du transporteur.
+            <span class="note-number">29.</span> Signature du destinataire: Signature et date du destinataire.
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

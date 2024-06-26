@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lettera di Vettura Internazionale</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-size: 10px; /* Reduzierte Schriftgröße */
+        }
+        .container {
+            width: 100%; /* Maximale Breite */
+            height: 100%; /* Maximale Höhe */
+            padding: 10px; /* Polsterung */
+            box-sizing: border-box;
+            border: 1px solid #000; /* Rahmen um das Formular */
+            background-color: #f0f8ff; /* Hintergrundfarbe */
+        }
+        h1 {
+            text-align: center;
+            font-size: 14px; /* Kleinere Überschrift */
+            margin-bottom: 5px; /* Weniger Abstand nach unten */
+            color: #00008b; /* Textfarbe */
+        }
+        .section {
+            margin-bottom: 5px; /* Weniger Abstand zwischen Abschnitten */
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 5px;
+        }
+        .section h2 {
+            grid-column: 1 / -1;
+            border-bottom: 1px solid #000;
+            padding-bottom: 3px; /* Weniger Polsterung unten */
+            margin-bottom: 5px; /* Weniger Abstand nach unten */
+            font-size: 12px; /* Kleinere Zwischenüberschriften */
+            color: #00008b; /* Textfarbe */
+        }
+        .form-group {
+            margin-bottom: 5px; /* Weniger Abstand zwischen Formulargruppen */
+            position: relative;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            font-size: 10px; /* Kleinere Beschriftungen */
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 3px; /* Weniger Polsterung */
+            margin-top: 2px; /* Weniger Abstand nach oben */
+            border: 1px solid #000;
+            border-radius: 2px; /* Weniger abgerundete Ecken */
+            font-size: 10px; /* Kleinere Eingabefelder */
+        }
+        .form-group textarea {
+            resize: vertical;
+            height: 40px; /* Weniger Höhe für Textbereiche */
+        }
+        .form-group::before {
+            content: attr(data-number);
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #00008b; /* Hintergrundfarbe der Nummer */
+            color: white;
+            border-radius: 50%;
+            width: 15px;
+            height: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px; /* Kleinere Schriftgröße für die Nummern */
+        }
+        .signatures {
+            display: flex;
+            justify-content: space-between;
+        }
+        .signature {
+            width: 30%;
+            text-align: center;
+        }
+        .signature input {
+            margin-top: 5px; /* Weniger Abstand nach oben */
+        }
+        .notes {
+            font-size: 8px; /* Sehr kleine Schriftgröße */
+            margin-top: 10px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Vier Spalten für die Erläuterungen */
+            grid-gap: 0; /* Kein Abstand zwischen den Erläuterungen */
+            line-height: 1.1; /* Geringere Zeilenhöhe */
+        }
+        .note {
+            display: flex;
+            align-items: center;
+        }
+        .note-number {
+            background-color: #00008b; /* Hintergrundfarbe der Nummer */
+            color: white;
+            border-radius: 50%;
+            width: 15px;
+            height: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px; /* Kleinere Schriftgröße für die Nummern */
+            margin-right: 3px; /* Weniger Abstand zwischen Nummer und Text */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Lettera di Vettura Internazionale</h1>
+
+    <div class="section">
+        <div class="form-group" data-number="1">
+            <label for="waybillNumber">Numero della Lettera di Vettura</label>
+            <input type="text" id="waybillNumber" name="waybillNumber" value="{{ WaybillID }}">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Informazioni sul Mittente</h2>
+        <div class="form-group" data-number="2">
+            <label for="senderName">Nome</label>
+            <input type="text" id="senderName" name="senderName" value="{{ SenderName }}">
+        </div>
+        <div class="form-group" data-number="3">
+            <label for="senderAddress">Indirizzo</label>
+            <input type="text" id="senderAddress" name="senderAddress" value="{{ SenderAddress }}">
+        </div>
+        <div class="form-group" data-number="4">
+            <label for="senderPhone">Telefono</label>
+            <input type="text" id="senderPhone" name="senderPhone" value="{{ SenderPhone }}">
+        </div>
+        <div class="form-group" data-number="5">
+            <label for="senderEmail">E-Mail</label>
+            <input type="email" id="senderEmail" name="senderEmail" value="{{ SenderEmail }}">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Informazioni sul Destinatario</h2>
+        <div class="form-group" data-number="6">
+            <label for="recipientName">Nome</label>
+            <input type="text" id="recipientName" name="recipientName" value="{{ RecipientName }}">
+        </div>
+        <div class="form-group" data-number="7">
+            <label for="recipientAddress">Indirizzo</label>
+            <input type="text" id="recipientAddress" name="recipientAddress" value="{{ RecipientAddress }}">
+        </div>
+        <div class="form-group" data-number="8">
+            <label for="recipientPhone">Telefono</label>
+            <input type="text" id="recipientPhone" name="recipientPhone" value="{{ RecipientPhone }}">
+        </div>
+        <div class="form-group" data-number="9">
+            <label for="recipientEmail">E-Mail</label>
+            <input type="email" id="recipientEmail" name="recipientEmail" value="{{ RecipientEmail }}">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Informazioni sul Vettore</h2>
+        <div class="form-group" data-number="10">
+            <label for="carrierName">Nome</label>
+            <input type="text" id="carrierName" name="carrierName" value="{{ CarrierName }}">
+        </div>
+        <div class="form-group" data-number="11">
+            <label for="carrierAddress">Indirizzo</label>
+            <input type="text" id="carrierAddress" name="carrierAddress" value="{{ CarrierAddress }}">
+        </div>
+        <div class="form-group" data-number="12">
+            <label for="carrierPhone">Telefono</label>
+            <input type="text" id="carrierPhone" name="carrierPhone" value="{{ CarrierPhone }}">
+        </div>
+        <div class="form-group" data-number="13">
+            <label for="carrierEmail">E-Mail</label>
+            <input type="email" id="carrierEmail" name="carrierEmail" value="{{ CarrierEmail }}">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Informazioni sulla Spedizione</h2>
+        <div class="form-group" data-number="14">
+            <label for="issueDate">Data di Emissione</label>
+            <input type="date" id="issueDate" name="issueDate" value="{{ IssueDate }}">
+        </div>
+        <div class="form-group" data-number="15">
+            <label for="placeOfIssue">Luogo di Emissione</label>
+            <input type="text" id="placeOfIssue" name="placeOfIssue" value="{{ PlaceOfIssue }}">
+        </div>
+        <div class="form-group" data-number="16">
+            <label for="goods">Merce</label>
+            <input type="text" id="goods" name="goods" value="{{ Goods }}">
+        </div>
+        <div class="form-group" data-number="17">
+            <label for="packaging">Imballaggio</label>
+            <input type="text" id="packaging" name="packaging" value="{{ Packaging }}">
+        </div>
+        <div class="form-group" data-number="18">
+            <label for="numberOfPackages">Numero di Collo</label>
+            <input type="number" id="numberOfPackages" name="numberOfPackages" value="{{ NumberOfPackages }}">
+        </div>
+        <div class="form-group" data-number="19">
+            <label for="totalWeight">Peso Totale (kg)</label>
+            <input type="number" step="0.01" id="totalWeight" name="totalWeight" value="{{ TotalWeight }}">
+        </div>
+        <div class="form-group" data-number="20">
+            <label for="remarks">Osservazioni</label>
+            <textarea id="remarks" name="remarks">{{ Remarks }}</textarea>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Informazioni sul Trasporto</h2>
+        <div class="form-group" data-number="21">
+            <label for="pickupLocation">Luogo di Ritiro</label>
+            <input type="text" id="pickupLocation" name="pickupLocation" value="{{ PickupLocation }}">
+        </div>
+        <div class="form-group" data-number="22">
+            <label for="pickupDate">Data di Ritiro</label>
+            <input type="date" id="pickupDate" name="pickupDate" value="{{ PickupDate }}">
+        </div>
+        <div class="form-group" data-number="23">
+            <label for="deliveryLocation">Luogo di Consegna</label>
+            <input type="text" id="deliveryLocation" name="deliveryLocation" value="{{ DeliveryLocation }}">
+        </div>
+        <div class="form-group" data-number="24">
+            <label for="deliveryDate">Data di Consegna</label>
+            <input type="date" id="deliveryDate" name="deliveryDate" value="{{ DeliveryDate }}">
+        </div>
+        <div class="form-group" data-number="25">
+            <label for="modeOfTransport">Modo di Trasporto</label>
+            <input type="text" id="modeOfTransport" name="modeOfTransport" value="{{ ModeOfTransport }}">
+        </div>
+        <div class="form-group" data-number="26">
+            <label for="insuranceDetails">Dettagli Assicurativi</label>
+            <textarea id="insuranceDetails" name="insuranceDetails">{{ InsuranceDetails }}</textarea>
+        </div>
+    </div>
+
+    <div class="section signatures">
+        <div class="signature" data-number="27">
+            <label for="senderSignature">Mittente</label>
+            <input type="text" id="senderSignature" name="senderSignature" value="" placeholder="Firma">
+            <input type="date" id="senderDate" name="senderDate" value="">
+        </div>
+        <div class="signature" data-number="28">
+            <label for="carrierSignature">Vettore</label>
+            <input type="text" id="carrierSignature" name="carrierSignature" value="" placeholder="Firma">
+            <input type="date" id="carrierDate" name="carrierDate" value="">
+        </div>
+        <div class="signature" data-number="29">
+            <label for="recipientSignature">Destinatario</label>
+            <input type="text" id="recipientSignature" name="recipientSignature" value="" placeholder="Firma">
+            <input type="date" id="recipientDate" name="recipientDate" value="">
+        </div>
+    </div>
+</div>
+
+<div class="notes">
+    <div class="note"><span class="note-number">1</span>Numero della Lettera di Vettura: Il numero identificativo unico della lettera di vettura.</div>
+    <div class="note"><span class="note-number">2</span>Nome del Mittente: Il nome completo del mittente.</div>
+    <div class="note"><span class="note-number">3</span>Indirizzo del Mittente: L'indirizzo completo del mittente.</div>
+    <div class="note"><span class="note-number">4</span>Telefono del Mittente: Il numero di telefono del mittente.</div>
+    <div class="note"><span class="note-number">5</span>E-Mail del Mittente: L'indirizzo e-mail del mittente.</div>
+    <div class="note"><span class="note-number">6</span>Nome del Destinatario: Il nome completo del destinatario.</div>
+    <div class="note"><span class="note-number">7</span>Indirizzo del Destinatario: L'indirizzo completo del destinatario.</div>
+    <div class="note"><span class="note-number">8</span>Telefono del Destinatario: Il numero di telefono del destinatario.</div>
+    <div class="note"><span class="note-number">9</span>E-Mail del Destinatario: L'indirizzo e-mail del destinatario.</div>
+    <div class="note"><span class="note-number">10</span>Nome del Vettore: Il nome completo del vettore.</div>
+    <div class="note"><span class="note-number">11</span>Indirizzo del Vettore: L'indirizzo completo del vettore.</div>
+    <div class="note"><span class="note-number">12</span>Telefono del Vettore: Il numero di telefono del vettore.</div>
+    <div class="note"><span class="note-number">13</span>E-Mail del Vettore: L'indirizzo e-mail del vettore.</div>
+    <div class="note"><span class="note-number">14</span>Data di Emissione: La data di emissione della lettera di vettura.</div>
+    <div class="note"><span class="note-number">15</span>Luogo di Emissione: Il luogo di emissione della lettera di vettura.</div>
+    <div class="note"><span class="note-number">16</span>Merce: La descrizione della merce.</div>
+    <div class="note"><span class="note-number">17</span>Imballaggio: Il tipo di imballaggio della merce.</div>
+    <div class="note"><span class="note-number">18</span>Numero di Collo: Il numero di colli.</div>
+    <div class="note"><span class="note-number">19</span>Peso Totale: Il peso totale della spedizione in chilogrammi.</div>
+    <div class="note"><span class="note-number">20</span>Osservazioni: Osservazioni o istruzioni aggiuntive.</div>
+    <div class="note"><span class="note-number">21</span>Luogo di Ritiro: Il luogo dove verrà ritirata la spedizione.</div>
+    <div class="note"><span class="note-number">22</span>Data di Ritiro: La data di ritiro della spedizione.</div>
+    <div class="note"><span class="note-number">23</span>Luogo di Consegna: Il luogo dove verrà consegnata la spedizione.</div>
+    <div class="note"><span class="note-number">24</span>Data di Consegna: La data di consegna della spedizione.</div>
+    <div class="note"><span class="note-number">25</span>Modo di Trasporto: Il modo di trasporto.</div>
+    <div class="note"><span class="note-number">26</span>Dettagli Assicurativi: Informazioni sull'assicurazione della spedizione.</div>
+    <div class="note"><span class="note-number">27</span>Firma del Mittente: La firma del mittente e la data.</div>
+    <div class="note"><span class="note-number">28</span>Firma del Vettore: La firma del vettore e la data.</div>
+    <div class="note"><span class="note-number">29</span>Firma del Destinatario: La firma del destinatario e la data.</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,299 @@
+
+  <!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krajowy list przewozowy / National Waybill</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-size: 10px;
+        }
+        .container {
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        h1 {
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .section {
+            margin-bottom: 5px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 5px;
+        }
+        .section h2 {
+            grid-column: 1 / -1;
+            border-bottom: 1px solid #000;
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+            font-size: 12px;
+            color: blue;
+        }
+        .form-group {
+            margin-bottom: 5px;
+            position: relative;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            font-size: 10px;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 3px;
+            margin-top: 2px;
+            border: 1px solid #000;
+            border-radius: 2px;
+            font-size: 10px;
+        }
+        .form-group textarea {
+            resize: vertical;
+            height: 40px;
+        }
+        .form-group::after {
+            content: attr(data-number);
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: blue;
+            color: white;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 10px;
+        }
+        .signatures {
+            display: flex;
+            justify-content: space-between;
+        }
+        .signature {
+            width: 30%;
+            text-align: center;
+            position: relative;
+        }
+        .signature input {
+            margin-top: 5px;
+        }
+        .notes {
+            font-size: 9px;
+            margin-top: 6px;
+        }
+        .notes .note {
+            display: inline-block;
+            vertical-align: top;
+            width: 30%;
+            margin-right: 5px;
+        }
+        .note-number {
+            color: blue;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Krajowy list przewozowy / National Waybill</h1>
+
+    <div class="section">
+        <div class="form-group" data-number="1">
+            <label for="frachtbriefnummer">Numer listu przewozowego / Waybill Number</label>
+            <input type="text" id="frachtbriefnummer" name="frachtbriefnummer" value="{{ FrachtbriefID }}">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Informacje o nadawcy / Sender Information</h2>
+        <div class="form-group" data-number="2">
+            <label for="absenderName">Imię</label>
+            <input type="text" id="absenderName" name="absenderName" value="{{ AbsenderName }}">
+        </div>
+        <div class="form-group" data-number="3">
+            <label for="absenderAnschrift">Adres / Address</label>
+            <input type="text" id="absenderAnschrift" name="absenderAnschrift" value="{{ AbsenderAnschrift }}">
+        </div>
+        <div class="form-group" data-number="4">
+            <label for="absenderTelefon">Telefon / Phone</label>
+            <input type="text" id="absenderTelefon" name="absenderTelefon" value="{{ AbsenderTelefon }}">
+        </div>
+        <div class="form-group" data-number="5">
+            <label for="absenderEmail">E-Mail / Email</label>
+            <input type="email" id="absenderEmail" name="absenderEmail" value="{{ AbsenderEmail }}">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Informacje o odbiorcy / Recipient Information</h2>
+        <div class="form-group" data-number="6">
+            <label for="empfaengerName">Imię</label>
+            <input type="text" id="empfaengerName" name="empfaengerName" value="{{ EmpfaengerName }}">
+        </div>
+        <div class="form-group" data-number="7">
+            <label for="empfaengerAnschrift">Adres / Address</label>
+            <input type="text" id="empfaengerAnschrift" name="empfaengerAnschrift" value="{{ EmpfaengerAnschrift }}">
+        </div>
+        <div class="form-group" data-number="8">
+            <label for="empfaengerTelefon">Telefon / Phone</label>
+            <input type="text" id="empfaengerTelefon" name="empfaengerTelefon" value="{{ EmpfaengerTelefon }}">
+        </div>
+        <div class="form-group" data-number="9">
+            <label for="empfaengerEmail">E-Mail / Email</label>
+            <input type="email" id="empfaengerEmail" name="empfaengerEmail" value="{{ EmpfaengerEmail }}">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Informacje o przewoźniku / Carrier Information</h2>
+        <div class="form-group" data-number="10">
+            <label for="frachtfuehrerName">Imię</label>
+            <input type="text" id="frachtfuehrerName" name="frachtfuehrerName" value="{{ FrachtfuehrerName }}">
+        </div>
+        <div class="form-group" data-number="11">
+            <label for="frachtfuehrerAnschrift">Adres / Address</label>
+            <input type="text" id="frachtfuehrerAnschrift" name="frachtfuehrerAnschrift" value="{{ FrachtfuehrerAnschrift }}">
+        </div>
+        <div class="form-group" data-number="12">
+            <label for="frachtfuehrerTelefon">Telefon / Phone</label>
+            <input type="text" id="frachtfuehrerTelefon" name="frachtfuehrerTelefon" value="{{ FrachtfuehrerTelefon }}">
+        </div>
+        <div class="form-group" data-number="13">
+            <label for="frachtfuehrerEmail">E-Mail / Email</label>
+            <input type="email" id="frachtfuehrerEmail" name="frachtfuehrerEmail" value="{{ FrachtfuehrerEmail }}">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Informacje o ładunku / Freight Information</h2>
+        <div class="form-group" data-number="14">
+            <label for="ausstellungsDatum">Data wystawienia / Date of Issue</label>
+            <input type="date" id="ausstellungsDatum" name="ausstellungsDatum" value="{{ AusstellungsDatum }}">
+        </div>
+        <div class="form-group" data-number="15">
+            <label for="ausstellungsOrt">Miejsce wystawienia / Place of Issue</label>
+            <input type="text" id="ausstellungsOrt" name="ausstellungsOrt" value="{{ Ausstellungsort }}">
+        </div>
+        <div class="form-group" data-number="16">
+            <label for="frachtgut">Towar / Goods</label>
+            <input type="text" id="frachtgut" name="frachtgut" value="{{ Frachtgut }}">
+        </div>
+        <div class="form-group" data-number="17">
+            <label for="verpackung">Opakowanie / Packaging</label>
+            <input type="text" id="verpackung" name="verpackung" value="{{ Verpackung }}">
+        </div>
+        <div class="form-group" data-number="18">
+            <label for="frachtstueckeAnzahl">Liczba paczek / Number of Packages</label>
+            <input type="number" id="frachtstueckeAnzahl" name="frachtstueckeAnzahl" value="{{ FrachtstueckeAnzahl }}">
+        </div>
+        <div class="form-group" data-number="19">
+            <label for="gesamtgewicht">Łączna waga (kg) / Total Weight (kg)</label>
+            <input type="number" step="0.01" id="gesamtgewicht" name="gesamtgewicht" value="{{ Gesamtgewicht }}">
+        </div>
+        <div class="form-group" data-number="20">
+            <label for="bemerkungen">Uwagi / Remarks</label>
+            <textarea id="bemerkungen" name="bemerkungen">{{ Bemerkungen }}</textarea>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Informacje o transporcie / Transport Information</h2>
+        <div class="form-group" data-number="21">
+            <label for="abholort">Miejsce odbioru / Pickup Location</label>
+            <input type="text" id="abholort" name="abholort" value="{{ Abholort }}">
+        </div>
+        <div class="form-group" data-number="22">
+            <label for="abholdatum">Data odbioru / Pickup Date</label>
+            <input type="date" id="abholdatum" name="abholdatum" value="{{ Abholdatum }}">
+        </div>
+        <div class="form-group" data-number="23">
+            <label for="lieferort">Miejsce dostawy / Delivery Location</label>
+            <input type="text" id="lieferort" name="lieferort" value="{{ Lieferort }}">
+        </div>
+        <div class="form-group" data-number="24">
+            <label for="lieferdatum">Data dostawy / Delivery Date</label>
+            <input type="date" id="lieferdatum" name="lieferdatum" value="{{ Lieferdatum }}">
+        </div>
+        <div class="form-group" data-number="25">
+            <label for="transportart">Rodzaj transportu / Mode of Transport</label>
+            <input type="text" id="transportart" name="transportart" value="{{ Transportart }}">
+        </div>
+        <div class="form-group" data-number="26">
+            <label for="versicherungsdetails">Szczegóły ubezpieczenia / Insurance Details</label>
+            <textarea id="versicherungsdetails" name="versicherungsdetails">{{ Versicherungsdetails }}</textarea>
+        </div>
+    </div>
+
+    <div class="section signatures">
+        <div class="signature" data-number="27">
+            <label for="absenderUnterschrift">Nadawca / Sender</label>
+            <input type="text" id="absenderUnterschrift" name="absenderUnterschrift" value="" placeholder="Podpis / Signature">
+            <input type="date" id="absenderDatum" name="absenderDatum" value="{{ AbsenderDatum }}">
+        </div>
+        <div class="signature" data-number="28">
+            <label for="frachtfuehrerUnterschrift">Przewoźnik / Carrier</label>
+            <input type="text" id="frachtfuehrerUnterschrift" name="frachtfuehrerUnterschrift" value="" placeholder="Podpis / Signature">
+            <input type="date" id="frachtfuehrerDatum" name="frachtfuehrerDatum" value="{{ FrachtfuehrerDatum }}">
+        </div>
+        <div class="signature" data-number="29">
+            <label for="empfaengerUnterschrift">Odbiorca / Recipient</label>
+            <input type="text" id="empfaengerUnterschrift" name="empfaengerUnterschrift" value="" placeholder="Podpis / Signature">
+            <input type="date" id="empfaengerDatum" name="empfaengerDatum" value="{{ EmpfaengerDatum }}">
+        </div>
+    </div>
+
+    <div class="notes">
+        <div class="note">
+            <span class="note-number">1.</span> Numer listu przewozowego: Unikalny numer identyfikacyjny listu przewozowego.
+            <span class="note-number">2.</span> Imię nadawcy: Pełne imię nadawcy.
+            <span class="note-number">3.</span> Adres nadawcy: Pełny adres nadawcy.
+            <span class="note-number">4.</span> Telefon nadawcy: Numer telefonu nadawcy.
+            <span class="note-number">5.</span> E-Mail nadawcy: Adres e-mail nadawcy.
+            <span class="note-number">6.</span> Imię odbiorcy: Pełne imię odbiorcy.
+            <span class="note-number">7.</span> Adres odbiorcy: Pełny adres odbiorcy.
+            <span class="note-number">8.</span> Telefon odbiorcy: Numer telefonu odbiorcy.
+            <span class="note-number">9.</span> E-Mail odbiorcy: Adres e-mail odbiorcy.
+        </div>
+        <div class="note">
+            <span class="note-number">10.</span> Imię przewoźnika: Pełne imię przewoźnika.
+            <span class="note-number">11.</span> Adres przewoźnika: Pełny adres przewoźnika.
+            <span class="note-number">12.</span> Telefon przewoźnika: Numer telefonu przewoźnika.
+            <span class="note-number">13.</span> E-Mail przewoźnika: Adres e-mail przewoźnika.
+            <span class="note-number">14.</span> Data wystawienia: Data wystawienia listu przewozowego.
+            <span class="note-number">15.</span> Miejsce wystawienia: Miejsce wystawienia listu przewozowego.
+            <span class="note-number">16.</span> Towar: Opis towaru.
+            <span class="note-number">17.</span> Opakowanie: Rodzaj opakowania towaru.
+            <span class="note-number">18.</span> Liczba paczek: Liczba paczek.
+        </div>
+        <div class="note">
+            <span class="note-number">19.</span> Łączna waga: Łączna waga towaru w kilogramach.
+            <span class="note-number">20.</span> Uwagi: Dodatkowe uwagi lub instrukcje.
+            <span class="note-number">21.</span> Miejsce odbioru: Miejsce, gdzie towar zostanie odebrany.
+            <span class="note-number">22.</span> Data odbioru: Data odbioru towaru.
+            <span class="note-number">23.</span> Miejsce dostawy: Miejsce, gdzie towar zostanie dostarczony.
+            <span class="note-number">24.</span> Data dostawy: Data dostawy towaru.
+            <span class="note-number">25.</span> Rodzaj transportu: Rodzaj transportu.
+            <span class="note-number">26.</span> Szczegóły ubezpieczenia: Informacje dotyczące ubezpieczenia towaru.
+            <span class="note-number">27.</span> Podpis nadawcy: Podpis nadawcy i data.
+            <span class="note-number">28.</span> Podpis przewoźnika: Podpis przewoźnika i data.
+            <span class="note-number">29.</span> Podpis odbiorcy: Podpis odbiorcy i data.
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
