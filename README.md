@@ -33,7 +33,7 @@ pip install PyQt5
 Starten Sie das Programm:
 
 ```python
-python main.py
+python frachtbrief.py
 ```
 
 Verwenden Sie das Menü, um internationale oder nationale Frachtbriefe zu erfassen oder abzurufen.
