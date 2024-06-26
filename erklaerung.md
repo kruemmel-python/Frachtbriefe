@@ -62,7 +62,7 @@ Programm kann auch HTML-Dateien erstellen, die den Frachtbrief darstellen, und d
 -----------------------------------------------------------------------------------------------------------------------------
 
 
-Natürlich, ich werde die Zusammenhänge zwischen den einzelnen Codezeilen, Funktionen und Definitionen im Detail erklären:
+Die Zusammenhänge zwischen den einzelnen Codezeilen, Funktionen und Definitionen im Detail erklärt:
 
 ### Importe und Bibliotheken
 ```python
