@@ -3,10 +3,10 @@ import sqlite3
 import webbrowser
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QAction, QMenu, QWidget,
                              QVBoxLayout, QFormLayout, QLineEdit, QPushButton,
-                             QTableWidget, QTableWidgetItem, QHeaderView, QHBoxLayout, QSplitter, QScrollArea)
+                             QTableWidget, QTableWidgetItem, QHeaderView, QHBoxLayout, 
+                             QSplitter, QScrollArea, QLabel)
 from PyQt5.QtCore import Qt, QPoint
-from PyQt5.QtGui import QFont
-
+from PyQt5.QtGui import QFont, QPixmap
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -17,6 +17,19 @@ class MainWindow(QMainWindow):
         self.setWindowTitle('Frachtbriefe / Waybills')
         self.setGeometry(100, 100, 1200, 800)
         self.setStyleSheet("background-color: #2e2e2e; color: #ffffff;")
+
+        # Create a central widget to hold the logo and other content
+        self.centralWidget = QWidget(self)
+        self.setCentralWidget(self.centralWidget)
+
+        self.layout = QVBoxLayout(self.centralWidget)
+        
+        # Add the logo at the start with fixed size 640x480
+        self.logoLabel = QLabel(self)
+        self.logoLabel.setFixedSize(640, 480)
+        self.logoLabel.setPixmap(QPixmap("logo.jpg").scaled(640, 480, Qt.KeepAspectRatio, Qt.SmoothTransformation))
+        self.logoLabel.setAlignment(Qt.AlignCenter)
+        self.layout.addWidget(self.logoLabel, alignment=Qt.AlignCenter)
 
         menubar = self.menuBar()
         menubar.setStyleSheet("background-color: #1e1e1e; color: #ffffff;")
@@ -45,6 +58,16 @@ class MainWindow(QMainWindow):
     def abrufenNational(self): 
         self.setCentralWidget(AbrufenForm('nationalefrachtbriefe'))
 
+    def clearCentralWidget(self):
+        # Clear the central widget before setting a new one
+        if self.centralWidget:
+            layout = self.centralWidget.layout()
+            if layout:
+                while layout.count():
+                    child = layout.takeAt(0)
+                    if child.widget():
+                        child.widget().deleteLater()
+            QWidget().setLayout(self.centralWidget.layout())
 
 class ErfassenForm(QWidget):
     def __init__(self, table):
@@ -203,6 +226,7 @@ class AbrufenForm(QWidget):
         )
 
         splitter.addWidget(self.tableWidget)
+        splitter.setSizes([300, 900])  # Adjust the initial sizes as needed
         layout.addWidget(splitter)
         self.setLayout(layout)
 
