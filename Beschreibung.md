@@ -1,3 +1,5 @@
+Eine einfache Erklärung des Codes, die für jemanden ohne Programmiererfahrung verständlich ist:
+
 ### Einleitung
 Ein Programm, das dir hilft, Frachtbriefe zu verwalten. Ein Frachtbrief ist ein Dokument, das
 Informationen über eine Sendung enthält, z.B. wer der Absender und der Empfänger sind, was 
@@ -10,24 +12,24 @@ zu speichern und wieder abzurufen.
 - **`import sys`**: Das wird benötigt, um das Programm zu starten und zu beenden. [Python sys documentation](https://docs.python.org/3/library/sys.html)
 - **`import sqlite3`**: Damit kannst du eine Datenbank nutzen, um die Frachtbriefinformationen zu speichern. [Python sqlite3 documentation](https://docs.python.org/3/library/sqlite3.html)
 - **`import webbrowser`**: Damit kannst du HTML-Dateien in deinem Standard-Webbrowser öffnen. [Python webbrowser documentation](https://docs.python.org/3/library/webbrowser.html)
-- **`from PyQt5.QtWidgets import ...`**: Das sind Werkzeuge, um die Benutzeroberfläche (die Fenster und Buttons) deines Programms zu erstellen. [PyQt5 documentation](https://www.riverbankcomputing.com/static/Docs/PyQt5/)
-- **`from PyQt5.QtCore import Qt, QPoint`**: Zusätzliche Werkzeuge für die Benutzeroberfläche. [PyQt5 QtCore documentation](https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtcore/qtcore.html)
+- **`from PyQt5.QtWidgets import ...`**: Das sind Werkzeuge, um die Benutzeroberfläche (die Fenster und Buttons) deines Programms zu erstellen. [PyQt5 documentation](https://doc.qt.io/qtforpython-5/index.html)
+- **`from PyQt5.QtCore import Qt, QPoint`**: Zusätzliche Werkzeuge für die Benutzeroberfläche. [PyQt5 QtCore documentation](https://doc.qt.io/qtforpython-5/PySide2/QtCore/index.html)
 
 #### Die Hauptklasse (`MainWindow`)
-- **`class MainWindow(QMainWindow):`**: Das ist die Hauptklasse deines Programms. Sie erstellt das Hauptfenster. [QMainWindow documentation](https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qmainwindow.html)
+- **`class MainWindow(QMainWindow):`**: Das ist die Hauptklasse deines Programms. Sie erstellt das Hauptfenster. [QMainWindow documentation](https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QMainWindow.html)
 - **`def __init__(self):`**: Das ist der Konstruktor der Klasse. Er wird aufgerufen, wenn du eine neue Instanz von `MainWindow` erstellst. [Python __init__ method](https://docs.python.org/3/reference/datamodel.html#object.__init__)
 - **`self.initUI()`**: Diese Methode richtet die Benutzeroberfläche ein.
 
 #### Benutzeroberfläche einrichten (`initUI`)
-- **`self.setWindowTitle('Frachtbriefe / Waybills')`**: Legt den Titel des Fensters fest. [QWidget setWindowTitle](https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qwidget.html#PyQt5.QtWidgets.QWidget.setWindowTitle)
-- **`self.setGeometry(100, 100, 1200, 800)`**: Setzt die Position und Größe des Fensters. [QWidget setGeometry](https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qwidget.html#PyQt5.QtWidgets.QWidget.setGeometry)
-- **`menubar = self.menuBar()`**: Erstellt eine Menüleiste. [QMainWindow menuBar](https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qmainwindow.html#PyQt5.QtWidgets.QMainWindow.menuBar)
+- **`self.setWindowTitle('Frachtbriefe / Waybills')`**: Legt den Titel des Fensters fest. [QWidget setWindowTitle](https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QWidget.setWindowTitle)
+- **`self.setGeometry(100, 100, 1200, 800)`**: Setzt die Position und Größe des Fensters. [QWidget setGeometry](https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QWidget.setGeometry)
+- **`menubar = self.menuBar()`**: Erstellt eine Menüleiste. [QMainWindow menuBar](https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QMainWindow.html#PySide2.QtWidgets.PySide2.QtWidgets.QMainWindow.menuBar)
 - **`self.createMenu(...)`**: Fügt Menüs für internationale und nationale Frachtbriefe hinzu.
 
 #### Menüs erstellen (`createMenu`)
 - **`def createMenu(self, menubar, title, erfassen, abrufen):`**: Diese Methode erstellt ein Menü.
-- **`menu.addAction(erfassenAction)`**: Fügt eine Aktion hinzu, um Daten einzugeben. [QMenu addAction](https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qmenu.html#PyQt5.QtWidgets.QMenu.addAction)
-- **`menu.addAction(abrufenAction)`**: Fügt eine Aktion hinzu, um Daten abzurufen. [QMenu addAction](https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qmenu.html#PyQt5.QtWidgets.QMenu.addAction)
+- **`menu.addAction(erfassenAction)`**: Fügt eine Aktion hinzu, um Daten einzugeben. [QMenu addAction](https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QMenu.html#PySide2.QtWidgets.PySide2.QtWidgets.QMenu.addAction)
+- **`menu.addAction(abrufenAction)`**: Fügt eine Aktion hinzu, um Daten abzurufen. [QMenu addAction](https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QMenu.html#PySide2.QtWidgets.PySide2.QtWidgets.QMenu.addAction)
 
 #### Daten eingeben und abrufen
 - **`ErfassenForm` und `AbrufenForm`**: Diese Klassen erstellen Formulare, um Daten einzugeben und abzurufen.
@@ -57,8 +59,8 @@ import sqlite3  # https://docs.python.org/3/library/sqlite3.html
 import webbrowser  # https://docs.python.org/3/library/webbrowser.html
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QAction, QMenu, QWidget,
                              QVBoxLayout, QFormLayout, QLineEdit, QPushButton,
-                             QTableWidget, QTableWidgetItem, QHeaderView, QHBoxLayout, QSplitter)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/
-from PyQt5.QtCore import Qt, QPoint  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtcore/qtcore.html
+                             QTableWidget, QTableWidgetItem, QHeaderView, QHBoxLayout, QSplitter)  # https://doc.qt.io/qtforpython-5/index.html
+from PyQt5.QtCore import Qt, QPoint  # https://doc.qt.io/qtforpython-5/PySide2/QtCore/index.html
 ```
 - **`import sys`**: Ermöglicht den Zugriff auf Systemfunktionen wie das Beenden des Programms.
 - **`import sqlite3`**: Ermöglicht die Verwendung einer SQLite-Datenbank zur Speicherung der Frachtbriefdaten.
@@ -68,7 +70,7 @@ from PyQt5.QtCore import Qt, QPoint  # https://www.riverbankcomputing.com/static
 
 ### Die Hauptklasse (`MainWindow`)
 ```python
-class MainWindow(QMainWindow):  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qmainwindow.html
+class MainWindow(QMainWindow):  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QMainWindow.html
     def __init__(self):  # https://docs.python.org/3/reference/datamodel.html#object.__init__
         super().__init__()  # https://docs.python.org/3/library/functions.html#super
         self.initUI()
@@ -81,11 +83,11 @@ class MainWindow(QMainWindow):  # https://www.riverbankcomputing.com/static/Docs
 ### Benutzeroberfläche einrichten (`initUI`)
 ```python
 def initUI(self):  # https://docs.python.org/3/tutorial/classes.html#method-objects
-    self.setWindowTitle('Frachtbriefe / Waybills')  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qwidget.html#PyQt5.QtWidgets.QWidget.setWindowTitle
-    self.setGeometry(100, 100, 1200, 800)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qwidget.html#PyQt5.QtWidgets.QWidget.setGeometry
-    menubar = self.menuBar()  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets
+    self.setWindowTitle('Frachtbriefe / Waybills')  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QWidget.setWindowTitle
+    self.setGeometry(100, 100, 1200, 800)  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QWidget.setGeometry
+    menubar = self.menuBar()  # https://doc.qt.io/qt
 
-/qmainwindow.html#PyQt5.QtWidgets.QMainWindow.menuBar
+forpython-5/PySide2/QtWidgets/QMainWindow.html#PySide2.QtWidgets.PySide2.QtWidgets.QMainWindow.menuBar
     self.createMenu(menubar, 'Internationaler Frachtbrief / International Waybill', self.erfassenInternational, self.abrufenInternational)
     self.createMenu(menubar, 'Nationaler Frachtbrief / National Waybill', self.erfassenNational, self.abrufenNational)
 ```
@@ -98,13 +100,13 @@ def initUI(self):  # https://docs.python.org/3/tutorial/classes.html#method-obje
 ### Menüs erstellen (`createMenu`)
 ```python
 def createMenu(self, menubar, title, erfassen, abrufen):  # https://docs.python.org/3/tutorial/classes.html#method-objects
-    menu = menubar.addMenu(title)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qmenubar.html#PyQt5.QtWidgets.QMenuBar.addMenu
-    erfassenAction = QAction('Daten erfassen / Enter Data', self)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qaction.html
-    erfassenAction.triggered.connect(erfassen)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtcore/qobject.html#PyQt5.QtCore.QObject.connect
-    menu.addAction(erfassenAction)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qmenu.html#PyQt5.QtWidgets.QMenu.addAction
-    abrufenAction = QAction('Daten abrufen / Retrieve Data', self)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qaction.html
-    abrufenAction.triggered.connect(abrufen)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtcore/qobject.html#PyQt5.QtCore.QObject.connect
-    menu.addAction(abrufenAction)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qmenu.html#PyQt5.QtWidgets.QMenu.addAction
+    menu = menubar.addMenu(title)  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QMenuBar.html#PySide2.QtWidgets.PySide2.QtWidgets.QMenuBar.addMenu
+    erfassenAction = QAction('Daten erfassen / Enter Data', self)  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QAction.html
+    erfassenAction.triggered.connect(erfassen)  # https://doc.qt.io/qtforpython-5/PySide2/QtCore/QObject.html#PySide2.QtCore.PySide2.QtCore.QObject.connect
+    menu.addAction(erfassenAction)  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QMenu.html#PySide2.QtWidgets.PySide2.QtWidgets.QMenu.addAction
+    abrufenAction = QAction('Daten abrufen / Retrieve Data', self)  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QAction.html
+    abrufenAction.triggered.connect(abrufen)  # https://doc.qt.io/qtforpython-5/PySide2/QtCore/QObject.html#PySide2.QtCore.PySide2.QtCore.QObject.connect
+    menu.addAction(abrufenAction)  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QMenu.html#PySide2.QtWidgets.PySide2.QtWidgets.QMenu.addAction
 ```
 - **`def createMenu(self, menubar, title, erfassen, abrufen):`**: Methode zur Erstellung eines Menüs.
 - **`menu = menubar.addMenu(title)`**: Fügt ein Menü mit dem gegebenen Titel zur Menüleiste hinzu.
@@ -118,7 +120,7 @@ def createMenu(self, menubar, title, erfassen, abrufen):  # https://docs.python.
 ### Daten eingeben und abrufen
 #### ErfassenForm
 ```python
-class ErfassenForm(QWidget):  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qwidget.html
+class ErfassenForm(QWidget):  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QWidget.html
     def __init__(self, table):  # https://docs.python.org/3/reference/datamodel.html#object.__init__
         super().__init__()  # https://docs.python.org/3/library/functions.html#super
         self.table = table
@@ -131,20 +133,20 @@ class ErfassenForm(QWidget):  # https://www.riverbankcomputing.com/static/Docs/P
 
 ```python
 def initUI(self):  # https://docs.python.org/3/tutorial/classes.html#method-objects
-    layout = QVBoxLayout()  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qvboxlayout.html
-    formLayout = QFormLayout()  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qformlayout.html
+    layout = QVBoxLayout()  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QVBoxLayout.html
+    formLayout = QFormLayout()  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QFormLayout.html
     self.fields = {
-        'AusstellungsDatum / Date of Issue': QLineEdit(),  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qlineedit.html
-        'Ausstellungsort / Place of Issue': QLineEdit(),  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qlineedit.html
+        'AusstellungsDatum / Date of Issue': QLineEdit(),  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QLineEdit.html
+        'Ausstellungsort / Place of Issue': QLineEdit(),  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QLineEdit.html
         ...
     }
     for field, widget in self.fields.items():  # https://docs.python.org/3/tutorial/controlflow.html#for-statements
-        formLayout.addRow(field, widget)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qformlayout.html#PyQt5.QtWidgets.QFormLayout.addRow
-    self.submitButton = QPushButton('Speichern / Save')  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qpushbutton.html
-    self.submitButton.clicked.connect(self.submitData)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtcore/qobject.html#PyQt5.QtCore.QObject.connect
-    layout.addLayout(formLayout)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qboxlayout.html#PyQt5.QtWidgets.QBoxLayout.addLayout
-    layout.addWidget(self.submitButton)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qboxlayout.html#PyQt5.QtWidgets.QBoxLayout.addWidget
-    self.setLayout(layout)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qwidget.html#PyQt5.QtWidgets.QWidget.setLayout
+        formLayout.addRow(field, widget)  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QFormLayout.html#PySide2.QtWidgets.PySide2.QtWidgets.QFormLayout.addRow
+    self.submitButton = QPushButton('Speichern / Save')  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QPushButton.html
+    self.submitButton.clicked.connect(self.submitData)  # https://doc.qt.io/qtforpython-5/PySide2/QtCore/QObject.html#PySide2.QtCore.PySide2.QtCore.QObject.connect
+    layout.addLayout(formLayout)  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QBoxLayout.html#PySide2.QtWidgets.PySide2.QtWidgets.QBoxLayout.addLayout
+    layout.addWidget(self.submitButton)  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QBoxLayout.html#PySide2.QtWidgets.PySide2.QtWidgets.QBoxLayout.addWidget
+    self.setLayout(layout)  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QWidget.setLayout
 ```
 - **`def initUI(self):`**: Methode zur Initialisierung der Benutzeroberfläche des Formulars.
 - **`layout = QVBoxLayout()`**: Erstellt ein vertikales Layout.
@@ -159,7 +161,7 @@ def initUI(self):  # https://docs.python.org/3/tutorial/classes.html#method-obje
 
 #### AbrufenForm
 ```python
-class AbrufenForm(QWidget):  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qwidget.html
+class AbrufenForm(QWidget):  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QWidget.html
     def __init__(self, table):  # https://docs.python.org/3/reference/datamodel.html#object.__init__
         super().__init__()  # https://docs.python.org/3/library/functions.html#super
         self.table = table
@@ -172,35 +174,35 @@ class AbrufenForm(QWidget):  # https://www.riverbankcomputing.com/static/Docs/Py
 
 ```python
 def initUI(self):  # https://docs.python.org/3/tutorial/classes.html#method-objects
-    layout = QHBoxLayout()  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qhboxlayout.html
-    splitter = QSplitter(Qt.Horizontal)  # https://www.riverbankcomputing.com
+    layout = QHBoxLayout()  # https://doc.qt.io/
 
-/static/Docs/PyQt5/api/qtwidgets/qsplitter.html
-    searchWidget = QWidget()  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qwidget.html
-    searchLayout = QFormLayout()  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qformlayout.html
+qtforpython-5/PySide2/QtWidgets/QHBoxLayout.html
+    splitter = QSplitter(Qt.Horizontal)  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QSplitter.html
+    searchWidget = QWidget()  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QWidget.html
+    searchLayout = QFormLayout()  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QFormLayout.html
     self.searchFields = {
-        'FrachtbriefID / Waybill ID': QLineEdit(),  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qlineedit.html
-        'AusstellungsDatum / Date of Issue': QLineEdit(),  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qlineedit.html
+        'FrachtbriefID / Waybill ID': QLineEdit(),  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QLineEdit.html
+        'AusstellungsDatum / Date of Issue': QLineEdit(),  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QLineEdit.html
         ...
     }
     for field, widget in self.searchFields.items():  # https://docs.python.org/3/tutorial/controlflow.html#for-statements
-        searchLayout.addRow(field, widget)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qformlayout.html#PyQt5.QtWidgets.QFormLayout.addRow
-    self.searchButton = QPushButton('Suchen / Search')  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qpushbutton.html
-    self.searchButton.clicked.connect(self.searchData)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtcore/qobject.html#PyQt5.QtCore.QObject.connect
-    searchLayout.addWidget(self.searchButton)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qboxlayout.html#PyQt5.QtWidgets.QBoxLayout.addWidget
-    searchWidget.setLayout(searchLayout)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qwidget.html#PyQt5.QtWidgets.QWidget.setLayout
-    splitter.addWidget(searchWidget)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qsplitter.html#PyQt5.QtWidgets.QSplitter.addWidget
-    self.tableWidget = QTableWidget()  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qtablewidget.html
-    self.tableWidget.setColumnCount(len(self.searchFields))  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qtablewidget.html#PyQt5.QtWidgets.QTableWidget.setColumnCount
-    self.tableWidget.setHorizontalHeaderLabels(self.searchFields.keys())  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qtablewidget.html#PyQt5.QtWidgets.QTableWidget.setHorizontalHeaderLabels
-    self.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Interactive)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qheaderview.html#PyQt5.QtWidgets.QHeaderView.setSectionResizeMode
-    self.tableWidget.horizontalHeader().setContextMenuPolicy(Qt.CustomContextMenu)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qheaderview.html#PyQt5.QtWidgets.QHeaderView.setContextMenuPolicy
-    self.tableWidget.horizontalHeader().customContextMenuRequested.connect(self.showHeaderContextMenu)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtcore/qobject.html#PyQt5.QtCore.QObject.connect
-    self.tableWidget.setContextMenuPolicy(Qt.CustomContextMenu)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qwidget.html#PyQt5.QtWidgets.QWidget.setContextMenuPolicy
-    self.tableWidget.customContextMenuRequested.connect(self.showRowContextMenu)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtcore/qobject.html#PyQt5.QtCore.QObject.connect
-    splitter.addWidget(self.tableWidget)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qsplitter.html#PyQt5.QtWidgets.QSplitter.addWidget
-    layout.addWidget(splitter)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qboxlayout.html#PyQt5.QtWidgets.QBoxLayout.addWidget
-    self.setLayout(layout)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qwidget.html#PyQt5.QtWidgets.QWidget.setLayout
+        searchLayout.addRow(field, widget)  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QFormLayout.html#PySide2.QtWidgets.PySide2.QtWidgets.QFormLayout.addRow
+    self.searchButton = QPushButton('Suchen / Search')  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QPushButton.html
+    self.searchButton.clicked.connect(self.searchData)  # https://doc.qt.io/qtforpython-5/PySide2/QtCore/QObject.html#PySide2.QtCore.PySide2.QtCore.QObject.connect
+    searchLayout.addWidget(self.searchButton)  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QBoxLayout.html#PySide2.QtWidgets.PySide2.QtWidgets.QBoxLayout.addWidget
+    searchWidget.setLayout(searchLayout)  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QWidget.setLayout
+    splitter.addWidget(searchWidget)  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QSplitter.html#PySide2.QtWidgets.PySide2.QtWidgets.QSplitter.addWidget
+    self.tableWidget = QTableWidget()  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QTableWidget.html
+    self.tableWidget.setColumnCount(len(self.searchFields))  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QTableWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QTableWidget.setColumnCount
+    self.tableWidget.setHorizontalHeaderLabels(self.searchFields.keys())  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QTableWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QTableWidget.setHorizontalHeaderLabels
+    self.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Interactive)  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QHeaderView.html#PySide2.QtWidgets.PySide2.QtWidgets.QHeaderView.setSectionResizeMode
+    self.tableWidget.horizontalHeader().setContextMenuPolicy(Qt.CustomContextMenu)  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QHeaderView.html#PySide2.QtWidgets.PySide2.QtWidgets.QHeaderView.setContextMenuPolicy
+    self.tableWidget.horizontalHeader().customContextMenuRequested.connect(self.showHeaderContextMenu)  # https://doc.qt.io/qtforpython-5/PySide2/QtCore/QObject.html#PySide2.QtCore.PySide2.QtCore.QObject.connect
+    self.tableWidget.setContextMenuPolicy(Qt.CustomContextMenu)  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QWidget.setContextMenuPolicy
+    self.tableWidget.customContextMenuRequested.connect(self.showRowContextMenu)  # https://doc.qt.io/qtforpython-5/PySide2/QtCore/QObject.html#PySide2.QtCore.PySide2.QtCore.QObject.connect
+    splitter.addWidget(self.tableWidget)  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QSplitter.html#PySide2.QtWidgets.PySide2.QtWidgets.QSplitter.addWidget
+    layout.addWidget(splitter)  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QBoxLayout.html#PySide2.QtWidgets.PySide2.QtWidgets.QBoxLayout.addWidget
+    self.setLayout(layout)  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QWidget.setLayout
 ```
 - **`def initUI(self):`**: Methode zur Initialisierung der Benutzeroberfläche des Formulars.
 - **`layout = QHBoxLayout()`**: Erstellt ein horizontales Layout.
@@ -241,12 +243,12 @@ def submitData(self):  # https://docs.python.org/3/tutorial/classes.html#method-
     conn.close()  # https://docs.python.org/3/library/sqlite3.html#sqlite3.Connection.close
 ```
 - **`def submitData(self):`**: Methode zum Speichern der eingegebenen Daten in der Datenbank.
-- **`conn = sqlite3.connect('frachtbriefe.db')`**: Stellt eine Verbindung zur SQLite-Datenbank her.
+- **`conn = sqlite3.connect('f
+
+rachtbriefe.db')`**: Stellt eine Verbindung zur SQLite-Datenbank her.
 - **`cursor = conn.cursor()`**: Erstellt einen Cursor zum Ausführen von SQL-Befehlen.
 - **`columns = ', '.join(self.fields.keys())`**: Erstellt eine durch Kommas getrennte Liste der Spaltennamen.
-- **`placeholders =
-
- ', '.join('?' * len(self.fields))`**: Erstellt Platzhalter für die Werte.
+- **`placeholders = ', '.join('?' * len(self.fields))`**: Erstellt Platzhalter für die Werte.
 - **`query = f'INSERT INTO {self.table} ({columns}) VALUES ({placeholders})'`**: Erstellt die SQL-Abfrage zum Einfügen der Daten.
 - **`values = [widget.text() for widget in self.fields.values()]`**: Erstellt eine Liste der eingegebenen Werte.
 - **`cursor.execute(query, values)`**: Führt die SQL-Abfrage aus und fügt die Daten in die Tabelle ein.
@@ -263,10 +265,10 @@ def searchData(self):  # https://docs.python.org/3/tutorial/classes.html#method-
     query = f"SELECT * FROM {self.table}" + (" WHERE " + " AND ".join(conditions) if conditions else "")  # https://docs.python.org/3/reference/lexical_analysis.html#f-strings
     cursor.execute(query, values)  # https://docs.python.org/3/library/sqlite3.html#sqlite3.Cursor.execute
     results = cursor.fetchall()  # https://docs.python.org/3/library/sqlite3.html#sqlite3.Cursor.fetchall
-    self.tableWidget.setRowCount(len(results))  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qtablewidget.html#PyQt5.QtWidgets.QTableWidget.setRowCount
+    self.tableWidget.setRowCount(len(results))  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QTableWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QTableWidget.setRowCount
     for row_idx, row_data in enumerate(results):  # https://docs.python.org/3/library/functions.html#enumerate
         for col_idx, col_data in enumerate(row_data):  # https://docs.python.org/3/library/functions.html#enumerate
-            self.tableWidget.setItem(row_idx, col_idx, QTableWidgetItem(str(col_data)))  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qtablewidget.html#PyQt5.QtWidgets.QTableWidget.setItem
+            self.tableWidget.setItem(row_idx, col_idx, QTableWidgetItem(str(col_data)))  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QTableWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QTableWidget.setItem
     conn.close()  # https://docs.python.org/3/library/sqlite3.html#sqlite3.Connection.close
 ```
 - **`def searchData(self):`**: Methode zum Suchen von Daten in der Datenbank.
@@ -287,13 +289,13 @@ def searchData(self):  # https://docs.python.org/3/tutorial/classes.html#method-
 #### Kontextmenü für Spaltenüberschriften (`showHeaderContextMenu`)
 ```python
 def showHeaderContextMenu(self, pos: QPoint):  # https://docs.python.org/3/tutorial/classes.html#method-objects
-    header = self.tableWidget.horizontalHeader()  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qtablewidget.html#PyQt5.QtWidgets.QTableWidget.horizontalHeader
-    logicalIndex = header.logicalIndexAt(pos)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qheaderview.html#PyQt5.QtWidgets.QHeaderView.logicalIndexAt
-    menu = QMenu()  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qmenu.html
-    resizeAction = QAction('Optimale Breite / Optimal Width', self)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qaction.html
-    resizeAction.triggered.connect(lambda: self.tableWidget.resizeColumnToContents(logicalIndex))  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtcore/qobject.html#PyQt5.QtCore.QObject.connect
-    menu.addAction(resizeAction)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qmenu.html#PyQt5.QtWidgets.QMenu.addAction
-    menu.exec(header.mapToGlobal(pos))  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qwidget.html#PyQt5.QtWidgets.QWidget.mapToGlobal
+    header = self.tableWidget.horizontalHeader()  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QTableWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QTableWidget.horizontalHeader
+    logicalIndex = header.logicalIndexAt(pos)  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QHeaderView.html#PySide2.QtWidgets.PySide2.QtWidgets.QHeaderView.logicalIndexAt
+    menu = QMenu()  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QMenu.html
+    resizeAction = QAction('Optimale Breite / Optimal Width', self)  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QAction.html
+    resizeAction.triggered.connect(lambda: self.tableWidget.resizeColumnToContents(logicalIndex))  # https://doc.qt.io/qtforpython-5/PySide2/QtCore/QObject.html#PySide2.QtCore.PySide2.QtCore.QObject.connect
+    menu.addAction(resizeAction)  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QMenu.html#PySide2.QtWidgets.PySide2.QtWidgets.QMenu.addAction
+    menu.exec(header.mapToGlobal(pos))  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QWidget.mapToGlobal
 ```
 - **`def showHeaderContextMenu(self, pos: QPoint):`**: Methode zum Anzeigen eines Kontextmenüs für die Spaltenüberschriften.
 - **`header = self.tableWidget.horizontalHeader()`**: Holt die horizontale Kopfzeile der Tabelle.
@@ -307,21 +309,21 @@ def showHeaderContextMenu(self, pos: QPoint):  # https://docs.python.org/3/tutor
 #### Kontextmenü für Tabellenzeilen (`showRowContextMenu`)
 ```python
 def showRowContextMenu(self, pos: QPoint):  # https://docs.python.org/3/tutorial/classes.html#method-objects
-    row = self.tableWidget.rowAt(pos.y())  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qtablewidget.html#PyQt5.QtWidgets.QTableWidget.rowAt
+    row = self.tableWidget.rowAt(pos.y())  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QTableWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QTableWidget.rowAt
     if row < 0: return
-    menu = QMenu()  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qmenu.html
-    createAction = QAction('Erstelle Frachtbrief / Create Waybill', self)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qaction.html
-    createAction.triggered.connect(lambda: self.createFrachtbrief(row))  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtcore/qobject.html#PyQt5.QtCore.QObject.connect
-    menu.addAction(createAction)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qmenu.html#PyQt5.QtWidgets.QMenu.addAction
-    menu.exec(self.tableWidget.viewport().mapToGlobal(pos))  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qwidget.html#PyQt5.QtWidgets.QWidget.mapToGlobal
+    menu = QMenu()  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QMenu.html
+    createAction = QAction('Erstelle Frachtbrief / Create Waybill', self)  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QAction.html
+    createAction.triggered.connect(lambda: self.createFrachtbrief(row))  # https://doc.qt.io/qtforpython-5/PySide2/QtCore/QObject.html#PySide2.QtCore.PySide2.QtCore.QObject.connect
+    menu.addAction(createAction)  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QMenu.html#PySide2.QtWidgets.PySide2.QtWidgets.QMenu.addAction
+    menu.exec(self.tableWidget.viewport().mapToGlobal(pos))  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QWidget.mapToGlobal
 ```
-- **`def showRowContextMenu(self, pos: QPoint):`**: Methode zum Anzeigen eines Kontextmenüs für die Tabellenzeilen.
+- **`def showRowContextMenu(self, pos: QPoint):`**: Methode zum Anzeigen eines Kontextmen
+
+üs für die Tabellenzeilen.
 - **`row = self.tableWidget.rowAt(pos.y())`**: Holt den Index der Zeile, an der das Kontextmenü angezeigt wird.
 - **`if row < 0: return`**: Bricht die Methode ab, wenn keine gültige Zeile gefunden wurde.
 - **`menu = QMenu()`**: Erstellt ein Kontextmenü.
-- **`createAction = QAction('Erstelle Frachtbrief / Create Waybill', self)`**: Erstellt eine Aktion zum Erstellen eines F
-
-rachtbriefs.
+- **`createAction = QAction('Erstelle Frachtbrief / Create Waybill', self)`**: Erstellt eine Aktion zum Erstellen eines Frachtbriefs.
 - **`createAction.triggered.connect(lambda: self.createFrachtbrief(row))`**: Verbindet die Aktion mit der Methode `createFrachtbrief`.
 - **`menu.addAction(createAction)`**: Fügt die Aktion zum Kontextmenü hinzu.
 - **`menu.exec(self.tableWidget.viewport().mapToGlobal(pos))`**: Zeigt das Kontextmenü an der angegebenen Position an.
@@ -355,9 +357,9 @@ def createFrachtbrief(self, row):  # https://docs.python.org/3/tutorial/classes.
 ### Hauptprogramm
 ```python
 if __name__ == '__main__':  # https://docs.python.org/3/reference/datamodel.html#module.__name__
-    app = QApplication(sys.argv)  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qapplication.html
+    app = QApplication(sys.argv)  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QApplication.html
     mainWindow = MainWindow()  # https://docs.python.org/3/reference/compound_stmts.html#class
-    mainWindow.show()  # https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qwidget.html#PyQt5.QtWidgets.QWidget.show
+    mainWindow.show()  # https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QWidget.show
     sys.exit(app.exec())  # https://docs.python.org/3/library/sys.html#sys.exit
 ```
 - **`if __name__ == '__main__':`**: Überprüft, ob das Skript direkt ausgeführt wird.
