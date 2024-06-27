@@ -1,65 +1,69 @@
-import sys
-import sqlite3
-import webbrowser
+# Importiere notwendige Module und Klassen
+import sys  # Modul für systembezogene Funktionen
+import sqlite3  # Modul für die SQLite-Datenbank
+import webbrowser  # Modul zum Öffnen von Webbrowsern
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QAction, QMenu, QWidget,
                              QVBoxLayout, QFormLayout, QLineEdit, QPushButton,
                              QTableWidget, QTableWidgetItem, QHeaderView, QHBoxLayout, 
-                             QSplitter, QScrollArea, QLabel)
-from PyQt5.QtCore import Qt, QPoint
-from PyQt5.QtGui import QFont, QPixmap
+                             QSplitter, QScrollArea, QLabel)  # Importiere PyQt5 Widgets und Layouts
+from PyQt5.QtCore import Qt, QPoint  # Importiere grundlegende Qt-Funktionen
+from PyQt5.QtGui import QFont, QPixmap  # Importiere Schriftarten und Bildfunktionen
 
+# Definiere die Hauptfensterklasse, die von QMainWindow erbt
 class MainWindow(QMainWindow):
     def __init__(self):
-        super().__init__()
-        self.initUI()
+        super().__init__()  # Initialisiere die Elternklasse
+        self.initUI()  # Rufe Methode auf, um die Benutzeroberfläche zu initialisieren
 
     def initUI(self):
-        self.setWindowTitle('Frachtbriefe / Waybills')
-        self.setGeometry(100, 100, 1200, 800)
-        self.setStyleSheet("background-color: #2e2e2e; color: #ffffff;")
+        self.setWindowTitle('Frachtbriefe / Waybills')  # Setze den Fenstertitel
+        self.setGeometry(100, 100, 1200, 800)  # Setze die Fenstergröße und Position
+        self.setStyleSheet("background-color: #2e2e2e; color: #ffffff;")  # Setze das Stylesheet
 
-        # Create a central widget to hold the logo and other content
+        # Erstelle ein zentrales Widget, um das Logo und andere Inhalte zu halten
         self.centralWidget = QWidget(self)
         self.setCentralWidget(self.centralWidget)
 
-        self.layout = QVBoxLayout(self.centralWidget)
+        self.layout = QVBoxLayout(self.centralWidget)  # Verwende ein vertikales Box-Layout
         
-        # Add the logo at the start with fixed size 640x480
+        # Füge das Logo mit fester Größe 640x480 hinzu
         self.logoLabel = QLabel(self)
         self.logoLabel.setFixedSize(640, 480)
         self.logoLabel.setPixmap(QPixmap("logo.jpg").scaled(640, 480, Qt.KeepAspectRatio, Qt.SmoothTransformation))
         self.logoLabel.setAlignment(Qt.AlignCenter)
         self.layout.addWidget(self.logoLabel, alignment=Qt.AlignCenter)
 
+        # Erstelle die Menüleiste und setze deren Stil
         menubar = self.menuBar()
         menubar.setStyleSheet("background-color: #1e1e1e; color: #ffffff;")
+        # Füge Menüs zur Menüleiste hinzu
         self.createMenu(menubar, 'Internationaler Frachtbrief / International Waybill', self.erfassenInternational, self.abrufenInternational)
         self.createMenu(menubar, 'Nationaler Frachtbrief / National Waybill', self.erfassenNational, self.abrufenNational)
 
     def createMenu(self, menubar, title, erfassen, abrufen):
-        menu = menubar.addMenu(title)
-        menu.setStyleSheet("background-color: #1e1e1e; color: #ffffff;")
-        erfassenAction = QAction('Daten erfassen / Enter Data', self)
-        erfassenAction.triggered.connect(erfassen)
-        menu.addAction(erfassenAction)
-        abrufenAction = QAction('Daten abrufen / Retrieve Data', self)
-        abrufenAction.triggered.connect(abrufen)
-        menu.addAction(abrufenAction)
+        menu = menubar.addMenu(title)  # Füge ein Menü zur Menüleiste hinzu
+        menu.setStyleSheet("background-color: #1e1e1e; color: #ffffff;")  # Setze den Menüstil
+        erfassenAction = QAction('Daten erfassen / Enter Data', self)  # Erstelle Aktion zum Erfassen von Daten
+        erfassenAction.triggered.connect(erfassen)  # Verbinde Aktion mit Methode
+        menu.addAction(erfassenAction)  # Füge Aktion zum Menü hinzu
+        abrufenAction = QAction('Daten abrufen / Retrieve Data', self)  # Erstelle Aktion zum Abrufen von Daten
+        abrufenAction.triggered.connect(abrufen)  # Verbinde Aktion mit Methode
+        menu.addAction(abrufenAction)  # Füge Aktion zum Menü hinzu
 
     def erfassenInternational(self): 
-        self.setCentralWidget(ErfassenForm('internationalefrachtbriefe'))
+        self.setCentralWidget(ErfassenForm('internationalefrachtbriefe'))  # Setze zentrales Widget auf Eingabeformular für internationale Frachtbriefe
 
     def abrufenInternational(self): 
-        self.setCentralWidget(AbrufenForm('internationalefrachtbriefe'))
+        self.setCentralWidget(AbrufenForm('internationalefrachtbriefe'))  # Setze zentrales Widget auf Abrufformular für internationale Frachtbriefe
 
     def erfassenNational(self): 
-        self.setCentralWidget(ErfassenForm('nationalefrachtbriefe'))
+        self.setCentralWidget(ErfassenForm('nationalefrachtbriefe'))  # Setze zentrales Widget auf Eingabeformular für nationale Frachtbriefe
 
     def abrufenNational(self): 
-        self.setCentralWidget(AbrufenForm('nationalefrachtbriefe'))
+        self.setCentralWidget(AbrufenForm('nationalefrachtbriefe'))  # Setze zentrales Widget auf Abrufformular für nationale Frachtbriefe
 
     def clearCentralWidget(self):
-        # Clear the central widget before setting a new one
+        # Lösche das zentrale Widget, bevor ein neues gesetzt wird
         if self.centralWidget:
             layout = self.centralWidget.layout()
             if layout:
@@ -69,6 +73,7 @@ class MainWindow(QMainWindow):
                         child.widget().deleteLater()
             QWidget().setLayout(self.centralWidget.layout())
 
+# Definiere die Eingabeformular-Klasse, die von QWidget erbt
 class ErfassenForm(QWidget):
     def __init__(self, table):
         super().__init__()
@@ -78,6 +83,7 @@ class ErfassenForm(QWidget):
     def initUI(self):
         layout = QVBoxLayout()
         formLayout = QFormLayout()
+        # Definiere die Felder für das Formular
         self.fields = {
             'AusstellungsDatum / Date of Issue': QLineEdit(),
             'Ausstellungsort / Place of Issue': QLineEdit(),
@@ -143,7 +149,7 @@ class ErfassenForm(QWidget):
         conn.commit()
         conn.close()
 
-
+# Definiere die Abrufformular-Klasse, die von QWidget erbt
 class AbrufenForm(QWidget):
     def __init__(self, table):
         super().__init__()
@@ -155,6 +161,7 @@ class AbrufenForm(QWidget):
         splitter = QSplitter(Qt.Horizontal)
         searchWidget = QWidget()
         searchLayout = QFormLayout()
+        # Definiere die Suchfelder für das Formular
         self.searchFields = {
             'FrachtbriefID / Waybill ID': QLineEdit(),
             'AusstellungsDatum / Date of Issue': QLineEdit(),
@@ -217,7 +224,7 @@ class AbrufenForm(QWidget):
         self.tableWidget.setContextMenuPolicy(Qt.CustomContextMenu)
         self.tableWidget.customContextMenuRequested.connect(self.showRowContextMenu)
 
-        # Make header green
+        # Mache den Header grün
         self.tableWidget.setStyleSheet(
             """
             QHeaderView::section {background-color: #00ff00; color: black;}
@@ -226,7 +233,7 @@ class AbrufenForm(QWidget):
         )
 
         splitter.addWidget(self.tableWidget)
-        splitter.setSizes([300, 900])  # Adjust the initial sizes as needed
+        splitter.setSizes([300, 900])  # Passe die anfänglichen Größen nach Bedarf an
         layout.addWidget(splitter)
         self.setLayout(layout)
 
@@ -300,9 +307,9 @@ class AbrufenForm(QWidget):
         
         webbrowser.open(filename)
 
-
+# Hauptprogrammstart
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    mainWindow = MainWindow()
-    mainWindow.show()
-    sys.exit(app.exec())
+    app = QApplication(sys.argv)  # Erstelle eine Anwendung
+    mainWindow = MainWindow()  # Erstelle das Hauptfenster
+    mainWindow.show()  # Zeige das Hauptfenster
+    sys.exit(app.exec())  # Starte die Anwendung und warte auf Beendigung
